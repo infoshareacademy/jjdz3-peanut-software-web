@@ -7,15 +7,15 @@
 </head>
 <body>
 <div class="container">
-  <h1>Rejestracja wizyty:</h1>
+  <h1>Register visit:</h1>
 
   <c:choose>
     <c:when test="${violations.size() == 0}">
-      <p class="text-success">Ankieta zapisana.</p>
+      <p class="text-success">Visit Registered!</p>
     </c:when>
 
     <c:when test="${violations.size() > 0}">
-      <p class="bg-warning">Niepoprawne pola: ${violations.size()}</p>
+      <p class="bg-warning">Number of violations: ${violations.size()}</p>
       <ul>
         <c:forEach var="violation" items="${violations}">
           <li>${violation.message}</li>
@@ -24,7 +24,7 @@
     </c:when>
 
     <c:otherwise>
-      <p class="text-primary">Wypełnij ankietę abyśmy mogli wybrać dla ciebie odpowiedniego lekarza i datę.</p>
+      <p class="text-primary">Fill in form</p>
     </c:otherwise>
 
   </c:choose>
@@ -32,13 +32,13 @@
   <form action="survey" method="post">
 
     <div class="form-group">
-      <label for="name">Imię</label>
-      <input type="text" class="form-control" name="name" id="name" placeholder="imię" value="${name}">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" name="name" id="name" placeholder="Name" value="${name}">
     </div>
 
     <div class="form-group">
-      <label for="surname">Nazwisko</label>
-      <input type="text" class="form-control" name="surname" id="surname" placeholder="nazwisko" value="${surname}">
+      <label for="surname">Surname</label>
+      <input type="text" class="form-control" name="surname" id="surname" placeholder="Surname" value="${surname}">
     </div>
 
     <div class="form-group">
@@ -47,36 +47,36 @@
     </div>
 
     <div class="form-group">
-      <label for="sex">Płeć</label>
-      <select class="form-control" name="sex" id="sex" placeholder="płeć" value="${sex}">
-        <option name="male" value="MALE">Mężczyzna</option>
-        <option name="female" value="FEMALE">Kobieta</option>
+      <label for="sex">Sex</label>
+      <select class="form-control" name="sex" id="sex" placeholder="Sex" value="${sex}">
+        <option name="male" value="MALE">Male</option>
+        <option name="female" value="FEMALE">Female</option>
       </select>
     </div>
 
     <div class="form-group">
       <label for="email">Email</label>
-      <input type="email" class="form-control" name="email" id="email" placeholder="email" value="${email}">
+      <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="${email}">
     </div>
 
     <div class="form-group">
-      <label for="preferedSpecialization">Jaka specjalizacja lekarza?</label>
-      <select class="form-control" name="preferedSpecialization" id="preferedSpecialization" placeholder="Jaka specjalizacja lekarza?" value="${preferedSpecialization}">
-        <option value="dentist">dentysta</option>
-        <option value="internist">internista</option>
-        <option value="laryngologist">laryngolog</option>
-        <option value="urologist">urolog</option>
+      <label for="preferedSpecialization">Prefered doctor's specialization</label>
+      <select class="form-control" name="preferedSpecialization" id="preferedSpecialization" placeholder="Choose one" value="${preferedSpecialization}">
+        <option value="dentist">dentist</option>
+        <option value="urologist">urologist</option>
+        <option value="internist">internist</option>
+        <option value="laryngologist">laryngologist</option>
       </select>
     </div>
 
     <div class="form-group">
-      <label for="preferedDay">Jaki dzień tygodnia?</label>
-      <select class="form-control" name="preferedDay" id="preferedDay" placeholder="Jaki dzień tygodnia?" value="${preferedDay}">
-        <option name="monday" value="monday">Poniedziałek</option>
-        <option name="tuesday" value="tuesday">Wtorek</option>
-        <option name="wednesday" value="wednesday">Środa</option>
-        <option name="thursday" value="thursday">Czwartek</option>
-        <option name="friday" value="friday">Piątek</option>
+      <label for="preferedDay">Prefered day</label>
+      <select class="form-control" name="preferedDay" id="preferedDay" placeholder="preferedDay" value="${preferedDay}">
+        <option name="monday" value="monday">Monday</option>
+        <option name="tuesday" value="tuesday">Tuesday</option>
+        <option name="wednesday" value="wednesday">Wednesday</option>
+        <option name="thursday" value="thursday">Thursday</option>
+        <option name="friday" value="friday">Friday</option>
       </select>
     </div>
 

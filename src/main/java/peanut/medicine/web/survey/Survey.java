@@ -30,8 +30,9 @@ public class Survey {
         creationTime = LocalDateTime.now();
     }
 
-    @NotBlank(message = "Imię nie może być puste")
-    @Size(min = 3, max = 40, message = "Imię musi mieć od 3 do 40 znaków")
+    @NotNull(message = "Name cannot be null")
+    @NotBlank(message = "Name cannot be blank")
+    @Size(min = 3, max = 40, message = "Name needs to be at least 3 characters long but not longer than 40")
     public String getName() {
         return name;
     }
@@ -40,8 +41,9 @@ public class Survey {
         this.name = name;
     }
 
-    @NotBlank(message = "Nazwisko nie może być puste")
-    @Size(min = 3, max = 60, message = "Nazwisko musi mieć od 3 do 60 znaków")
+    @NotNull(message = "Surname cannot be null")
+    @NotBlank(message = "Surname cannot be blank")
+    @Size(min = 3, max = 60, message = "Surname needs to be at least 3 characters long but not longer than 60")
     public String getSurname() {
         return surname;
     }
@@ -50,7 +52,8 @@ public class Survey {
         this.surname = surname;
     }
 
-    @NotBlank(message = "Pesel nie może być pusty")
+    @NotNull(message = "Pesel cannot be null")
+    @NotBlank(message = "Pesel cannot be blank")
     @Pesel
     public String getPesel() {
         return pesel;
@@ -76,8 +79,8 @@ public class Survey {
         this.preferedDay = preferedDay;
     }
 
-    @NotBlank(message = "Email nie może być pusty")
-    @Email(message = "Email ma zły format")
+    @NotBlank(message = "Email cannot be blank")
+    @Email(message = "Email has incorrect format")
     public String getEmail() {
         return email;
     }
@@ -100,5 +103,13 @@ public class Survey {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public LocalDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(LocalDateTime creationTime) {
+        this.creationTime = creationTime;
     }
 }

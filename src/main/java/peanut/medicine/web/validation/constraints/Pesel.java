@@ -17,7 +17,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface Pesel {
 
-    String message() default "Pesel ma zły format";
+    String message() default "Pesel has wrong format";
 
     Class<?>[] groups() default { };
 

@@ -19,7 +19,7 @@ public class PeselValidator implements ConstraintValidator<Pesel, String> {
         //check length
         if (!object.matches("^[0-9]{11}$"))
         {
-            addCustomViolation("Pesel musi mieć 11 znaków", constraintContext);
+            addCustomViolation("Pesel must be made of 11 digits", constraintContext);
             return false;
         }
 
@@ -47,7 +47,7 @@ public class PeselValidator implements ConstraintValidator<Pesel, String> {
         boolean isGoodMonth = Arrays.stream(possibleMonthValues).anyMatch(x -> x == month);
         if(!isGoodMonth)
         {
-            addCustomViolation("Pesel ma niepoprawną cześć odpowiadjącą za miesiąc", constraintContext);
+            addCustomViolation("Pesel has wrong month part", constraintContext);
             return false;
         }
 
@@ -57,7 +57,7 @@ public class PeselValidator implements ConstraintValidator<Pesel, String> {
                 (isFebruary && 1 <= day && day <= 28) || (!isFebruary && 1 <= day && day <= 31)) // one of this makes day of month valid
                 )
         {
-            addCustomViolation("Pesel ma niepoprawną cześć odpowiadjącą za dzień miesiąca", constraintContext);
+            addCustomViolation("Pesel has wrong day of month part", constraintContext);
             return false;
         }
 
@@ -77,7 +77,7 @@ public class PeselValidator implements ConstraintValidator<Pesel, String> {
         int controlSum = 9*dA + 7*dB + 3*dC + dD + 9*dE + 7*dF + 3*dG + dH + 9*dI + 7*dJ;
         if((controlSum % 10) != controlDigit)
         {
-            addCustomViolation("Pesel ma niepoprawną cyfrę kontrolną", constraintContext);
+            addCustomViolation("Pesel has incorrect control(last) digit", constraintContext);
             return false;
         }
 

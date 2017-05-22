@@ -2,8 +2,8 @@
 <title>Peanut Medicine</title>
 
 <meta content="Peanut Medicine" name="description">
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
 <!-- Bootstrap -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">

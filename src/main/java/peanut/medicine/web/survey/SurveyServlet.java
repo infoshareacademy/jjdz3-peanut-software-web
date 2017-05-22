@@ -35,17 +35,19 @@ public class SurveyServlet extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        req.setCharacterEncoding("UTF-8");
         req.getRequestDispatcher("survey.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        req.setCharacterEncoding("UTF-8");
+
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
         String pesel = req.getParameter("pesel");
         String sex = req.getParameter("sex");
-//        Survey.Sex sex = Enum.valueOf(Survey.Sex.class, req.getParameter("sex"));
         String email = req.getParameter("email");
         String preferedSpecialization = req.getParameter("preferedSpecialization");
         String preferedDay = req.getParameter("preferedDay");
