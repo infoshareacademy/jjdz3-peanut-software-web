@@ -17,6 +17,13 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+
         <dependency>
             <groupId>com.infoshareacademy</groupId>
             <artifactId>peanut.medicine</artifactId>
@@ -40,7 +47,16 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>5.4.1.Final</version>
+            <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.2.10.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- TESTS -->
         <dependency>
             <groupId>junit</groupId>
@@ -53,6 +69,15 @@
             <artifactId>arquillian-junit-container</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.0-api -->
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>1.0.1.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
+
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
@@ -183,7 +208,7 @@
     </properties>
 
     <profiles>
-        <profile>
+        <!--<profile>
             <id>arquillian-weld-embedded</id>
             <dependencies>
                 <dependency>
@@ -205,7 +230,7 @@
                     <scope>test</scope>
                 </dependency>
             </dependencies>
-        </profile>
+        </profile>-->
         <profile>
             <id>arquillian-wildfly-managed</id>
             <activation>
