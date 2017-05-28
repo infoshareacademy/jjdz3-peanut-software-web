@@ -14,9 +14,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -43,42 +41,45 @@ public class SurveyServlet extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
-
-        String name = req.getParameter("name");
-        String surname = req.getParameter("surname");
-        String pesel = req.getParameter("pesel");
-        String sex = req.getParameter("sex");
-        String email = req.getParameter("email");
-        String preferedSpecialization = req.getParameter("preferedSpecialization");
-        String preferedDay = req.getParameter("preferedDay");
-
-        Survey survey = new Survey();
-        survey.setName(name);
-        survey.setSurname(surname);
-        survey.setPesel(pesel);
-        survey.setSex(sex);
-        survey.setEmail(email);
-        survey.setPreferedSpecialization(preferedSpecialization);
-        survey.setPreferedDay(preferedDay);
+        Survey survey = makeSurveyFromParams(req);
 
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<Survey>> violations = validator.validate(survey);
 
         if (violations.size() > 0) {
-
             LOGGER.debug(violations);
-            req.setAttribute("name", name);
-            req.setAttribute("surname", surname);
-            req.setAttribute("pesel", pesel);
-            req.setAttribute("sex", sex);
-            req.setAttribute("email", email);
-            req.setAttribute("preferedSpecialization", preferedSpecialization);
-            req.setAttribute("preferedDay", preferedDay);
+            req = copyParamsToAttribs(req);
+
         } else {
             storage.add(survey);
         }
 
         req.setAttribute("violations", violations);
         req.getRequestDispatcher("survey.jsp").forward(req, resp);
+    }
+
+    private Survey makeSurveyFromParams(HttpServletRequest req)
+    {
+        Survey survey = new Survey();
+        survey.setName(req.getParameter("name"));
+        survey.setSurname(req.getParameter("surname"));
+        survey.setPesel(req.getParameter("pesel"));
+        survey.setSex(req.getParameter("sex"));
+        survey.setEmail(req.getParameter("email"));
+        survey.setPreferedSpecialization(req.getParameter("preferedSpecialization"));
+        survey.setPreferedDay(req.getParameter("preferedDay"));
+        return survey;
+    }
+
+    private HttpServletRequest copyParamsToAttribs(HttpServletRequest req)
+    {
+        req.setAttribute("name", req.getParameter("name"));
+        req.setAttribute("surname", req.getParameter("surname"));
+        req.setAttribute("pesel", req.getParameter("pesel"));
+        req.setAttribute("sex", req.getParameter("sex"));
+        req.setAttribute("email", req.getParameter("email"));
+        req.setAttribute("preferedSpecialization", req.getParameter("preferedSpecialization"));
+        req.setAttribute("preferedDay", req.getParameter("preferedDay"));
+        return req;
     }
 }

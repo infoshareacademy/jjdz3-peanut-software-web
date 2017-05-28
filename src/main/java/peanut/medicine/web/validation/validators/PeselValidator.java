@@ -18,7 +18,7 @@ public class PeselValidator implements ConstraintValidator<Pesel, String> {
             return true;
         }
 
-        if(!this.hasElevenDigits(object))
+        if(!hasElevenDigits(object))
         {
             addCustomViolation("Pesel must be made of 11 digits", constraintContext);
             return false;
@@ -57,6 +57,7 @@ public class PeselValidator implements ConstraintValidator<Pesel, String> {
         int day = Integer.parseInt(object.substring(4,6));
 
         boolean isFebruary = Arrays.stream(februaryCodes).anyMatch(x -> x == month);
+
         return (isFebruary && 1 <= day && day <= 28)
                 ||
                 (!isFebruary && 1 <= day && day <= 31); // one of these two conditions makes day of month valid
