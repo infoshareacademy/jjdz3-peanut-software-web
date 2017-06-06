@@ -9,12 +9,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Created by moody on 28.05.17.
  */
 @WebServlet(urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String sessionId = request.getSession().getId();
+
+        Boolean logged;
+        Optional<Object> loggedObj = Optional.ofNullable(request.getSession().getAttribute("logged"));
+        if(loggedObj.isPresent())
+        {
+            logged = true;
+
+        } else {
+            logged = false;
+        }
+
+        request.setAttribute("logged", logged);
+        System.out.println("sessioId:"+sessionId);
+        System.out.println("logged:"+logged);
+
+        response.setContentType("text/html");
+        request.getRequestDispatcher("index3.jsp").forward(request, response);
+    }
+
+
     @Override
     protected void doPost (HttpServletRequest req,
                            HttpServletResponse resp)
@@ -32,6 +57,7 @@ public class LoginServlet extends HttpServlet {
 
             HttpSession session = req.getSession(true);
             session.setAttribute("userName", name);
+            session.setAttribute("logged", true);
             req.getServletContext()
                     .getRequestDispatcher("/index4.jsp").forward(req, resp);
 
