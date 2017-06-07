@@ -9,10 +9,10 @@ public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
-
     private String name;
+    @Column(unique=true)
     private String email;
-    @Column(columnDefinition="tinyint(1) default 0", unique=true)
+    @Column(columnDefinition="tinyint(1) default 0")
     private Boolean admin;
     private LocalDateTime creationTime;
 
