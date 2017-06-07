@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
+@Singleton
+@Default
 public class SurveyStore {
 
     @PersistenceContext

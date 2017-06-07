@@ -7,17 +7,18 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
     private String name;
     private String email;
-    @Column(nullable = false, columnDefinition="int default 0")
+    @Column(columnDefinition="tinyint(1) default 0", unique=true)
     private Boolean admin;
     private LocalDateTime creationTime;
 
     @PrePersist
     void create() {
+        admin = false;
         creationTime = LocalDateTime.now();
     }
 
