@@ -98,7 +98,7 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.google.api.client/google-api-client-googleapis-auth-oauth -->
-        
+
 
         <!-- TESTS -->
         <dependency>
@@ -134,9 +134,10 @@
             <type>pom</type>
             <scope>test</scope>
         </dependency>
+        <!-- Log4j logger -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
+            <artifactId>log4j-api</artifactId>
             <version>2.8.1</version>
         </dependency>
         <dependency>
@@ -261,7 +262,7 @@
     </properties>
 
     <profiles>
-        <!--<profile>
+        <profile>
             <id>arquillian-weld-embedded</id>
             <dependencies>
                 <dependency>
@@ -283,7 +284,7 @@
                     <scope>test</scope>
                 </dependency>
             </dependencies>
-        </profile>-->
+        </profile>
         <profile>
             <id>arquillian-wildfly-managed</id>
             <activation>
