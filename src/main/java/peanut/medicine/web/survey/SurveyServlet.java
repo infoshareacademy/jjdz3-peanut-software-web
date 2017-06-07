@@ -25,7 +25,6 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 public class SurveyServlet extends HttpServlet{
 
     @Inject
-    @Default
     SurveyStore storage;
 
     private static final Logger LOGGER = getLogger(SurveyServlet.class);

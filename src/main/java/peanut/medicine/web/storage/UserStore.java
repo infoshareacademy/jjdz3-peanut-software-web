@@ -1,20 +1,22 @@
 package peanut.medicine.web.storage;
 
-import peanut.medicine.web.survey.Survey;
+import peanut.medicine.web.user.User;
 import javax.enterprise.inject.Default;
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-public class SurveyStore {
+@Singleton
+@Default
+public class UserStore {
 
     @PersistenceContext
     private EntityManager em;
 
     @Transactional
-    public void add(Survey survey) {
-        em.persist(survey);
+    public void add(User user) {
+        em.persist(user);
     }
 
 }

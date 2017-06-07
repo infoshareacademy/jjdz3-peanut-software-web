@@ -1,7 +1,11 @@
 package peanut;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import peanut.medicine.web.storage.UserStore;
+import peanut.medicine.web.user.User;
 
+import javax.enterprise.inject.Default;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +20,10 @@ import java.util.Optional;
  */
 @WebServlet(urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
+
+    @Inject
+    @Default
+    UserStore storage;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,8 +42,6 @@ public class LoginServlet extends HttpServlet {
         request.setAttribute("logged", logged);
         System.out.println("sessioId:"+sessionId);
         System.out.println("logged:"+logged);
-
-        response.setContentType("text/html");
         request.getRequestDispatcher("index3.jsp").forward(request, response);
     }
 
@@ -45,8 +51,6 @@ public class LoginServlet extends HttpServlet {
                            HttpServletResponse resp)
             throws ServletException, IOException {
 
-        resp.setContentType("text/html");
-
         try {
             String idToken = req.getParameter("id_token");
             GoogleIdToken.Payload payLoad = IdTokenVerifierAndParser.getPayload(idToken);
@@ -54,6 +58,11 @@ public class LoginServlet extends HttpServlet {
             String email = payLoad.getEmail();
             System.out.println("User name: " + name);
             System.out.println("User email: " + email);
+
+            User user = new User();
+            user.setName(name);
+            user.setEmail(email);
+            storage.add(user);
 
             HttpSession session = req.getSession(true);
             session.setAttribute("userName", name);

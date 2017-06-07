@@ -22,34 +22,9 @@ public class LogoutServlet extends HttpServlet {
         request.getSession().setAttribute("logged", false);
 
         System.out.println("logged:"+request.getSession().getAttribute("logged").toString());
+        String sessionId = request.getSession().getId();
+        System.out.println("sessioId:"+sessionId);
 
-        response.setContentType("text/html");
         request.getRequestDispatcher("index3.jsp").forward(request, response);
-
     }
-
-//    @Override
-//    protected void doPost (HttpServletRequest req,
-//                           HttpServletResponse resp)
-//            throws ServletException, IOException {
-//
-//        resp.setContentType("text/html");
-//
-//        try {
-//            String idToken = req.getParameter("id_token");
-//            GoogleIdToken.Payload payLoad = IdTokenVerifierAndParser.getPayload(idToken);
-//            String name = (String) payLoad.get("name");
-//            String email = payLoad.getEmail();
-//            System.out.println("User name: " + name);
-//            System.out.println("User email: " + email);
-//
-//            HttpSession session = req.getSession(true);
-//            session.setAttribute("userName", name);
-//            req.getServletContext()
-//                    .getRequestDispatcher("/index3.jsp").forward(req, resp);
-//
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }
