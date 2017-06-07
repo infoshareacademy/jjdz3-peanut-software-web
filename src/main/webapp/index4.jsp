@@ -28,16 +28,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="#">Główna</a></li>
                 <li><a href="#">Kontakt</a></li>
-                <%--<li><a href="${pageContext.request.contextPath}/index3.jsp" method="post">Wyloguj</a></li>--%>
-                <li><a href="https://mail.google.com/mail/u/0/?logout&hl=en&continue=http://localhost:8080/peanut/logut">Wyloguj</a></li>
-                <%--%a{:href => "https://mail.google.com/mail/u/0/?logout&hl=en"} sign-out of google account--%>
-            <%-- <form action="${pageContext.request.contextPath}/logout" method="post">
-
-                    <input type="submit" value="Logout" />
-
-                </form>--%>
-
-
+                <li><a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/peanut/logout">Wyloguj</a></li>
             </ul>
         </div>
 
