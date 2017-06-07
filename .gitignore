@@ -2,3 +2,5 @@
 target
 out
 logs
+src\main\resources\META-INF\persistence.xml
+src\main\resources\configuration.properties

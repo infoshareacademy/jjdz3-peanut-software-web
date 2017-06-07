@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container">
-  <h1>Visit registered:</h1>
+  <h1>Survey registered:</h1>
 
   <p>Name: ${name}</p>
   <p>Surname: ${surname}</p>
