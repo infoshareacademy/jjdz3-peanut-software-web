@@ -49,13 +49,14 @@ public class SurveyServlet extends HttpServlet{
         if (violations.size() > 0) {
             LOGGER.debug(violations);
             req = copyParamsToAttribs(req);
+            req.setAttribute("violations", violations);
+            req.getRequestDispatcher("survey.jsp").forward(req, resp);
 
         } else {
             storage.add(survey);
+            req = copyParamsToAttribs(req);
+            req.getRequestDispatcher("survey-sent.jsp").forward(req, resp);
         }
-
-        req.setAttribute("violations", violations);
-        req.getRequestDispatcher("survey.jsp").forward(req, resp);
     }
 
     private Survey makeSurveyFromParams(HttpServletRequest req)

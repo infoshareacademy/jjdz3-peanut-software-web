@@ -24,7 +24,7 @@
     </c:when>
 
     <c:otherwise>
-      <p class="text-primary">Fill in form</p>
+      <p class="text-info">Fill in form:</p>
     </c:otherwise>
 
   </c:choose>
