@@ -6,7 +6,3 @@
     </a>
     <p>Copyright @ PeanutMedicine for infoShare Academy 2017</p>
 </footer>
-
-<script src="${pageContext.request.contextPath}/js/jquery-3.2.1.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/js/main.js"></script>

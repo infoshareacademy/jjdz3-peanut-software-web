@@ -115,3 +115,12 @@ footer .glyphicon {
     margin-bottom: 20px;
     color: #1dadd1;
 }
+
+.panel-heading {
+    background-color: #1dadd1 !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    text-transform: uppercase;
+    line-height: 1.42857143 !important;
+    letter-spacing: 2px;
+}
