@@ -6,33 +6,8 @@
     <jsp:include page="partials/meta.jsp"/>
 </head>
 <body id="start" data-spy="scroll" data-target=".navbar" data-offset="60">
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="index.html">
-                <span class="glyphicon glyphicon-link"></span> PEANUT MEDICINE</a>
-        </div>
-        <div class="collapse navbar-collapse navHeaderCollapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="<c:url value="index.html#about" />">ABOUT US</a></li>
-                <li><a href="#">APPOINTMENTS</a></li>
-                <li><a href="#">NEW PATIENTS</a></li>
-                <li><a href="#">PRESCRIPTIONS</a></li>
-                <li><a href="<c:url value="index.html#services" />">SERVICES</a></li>
-                <li><a href="<c:url value="index.html#staff" />">STAFF</a></li>
-                <li><a href="<c:url value="index.html#contact" />">CONTACT</a></li>
-                <li>
-                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+
+<jsp:include page="partials/navbar.jsp"/>
 
 <div class="container-fluid bg-grey">
     <div class="row">
@@ -76,8 +51,8 @@
                             <div class="col-sm-9">
                                 <select class="form-control selectpicker" name="sex" id="sex">
                                     <option value="" disabled selected>Sex</option>
-                                    <option name="male" value="MALE">Male</option>
-                                    <option name="female" value="FEMALE">Female</option>
+                                    <option name="male" value="Male">Male</option>
+                                    <option name="female" value="Female">Female</option>
                                 </select>
                             </div>
                         </div>
@@ -109,11 +84,11 @@
                             <div class="col-sm-9">
                                 <select class="form-control selectpicker" name="preferedDay" id="preferedDay">
                                     <option value="" disabled selected>Choose preferred day for your visit</option>
-                                    <option name="monday" value="monday">Monday</option>
-                                    <option name="tuesday" value="tuesday">Tuesday</option>
-                                    <option name="wednesday" value="wednesday">Wednesday</option>
-                                    <option name="thursday" value="thursday">Thursday</option>
-                                    <option name="friday" value="friday">Friday</option>
+                                    <option name="monday" value="Monday">Monday</option>
+                                    <option name="tuesday" value="Tuesday">Tuesday</option>
+                                    <option name="wednesday" value="Wednesday">Wednesday</option>
+                                    <option name="thursday" value="Thursday">Thursday</option>
+                                    <option name="friday" value="Friday">Friday</option>
                                 </select>
                             </div>
                         </div>
