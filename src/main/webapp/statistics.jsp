@@ -34,7 +34,7 @@
             try
             {
                 Class.forName("com.mysql.jdbc.Driver");
-                String url="jdbc:mysql://localhost:3306/isa";
+                String url="jdbc:mysql://localhost:3306/peanutDB";
                 String username="peanut_user";
                 String password="admin";
                 String query="select preferedSpecialization, count(name) from isaDB GROUP BY  preferedSpecialization";
@@ -75,6 +75,7 @@
     <a href="/peanut/index3.jsp" id="CreateCourse" ><button type="submit">BACK</button></a>
 
 </div>
+    <jsp:include page="partials/footer.jsp" />
 </div>
 </body>
 
