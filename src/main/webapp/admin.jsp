@@ -42,7 +42,7 @@
                                         <div class="well text-center">
                                             <span class="glyphicon glyphicon-user logo-medium"></span>
                                             <h2>Users</h2>
-                                            <span class="badge">3</span>
+                                            <span class="badge">${users.size()}</span>
                                         </div>
                                     </a>
                                 </div>
@@ -51,7 +51,7 @@
                                         <div class="well well text-center">
                                             <span class="glyphicon glyphicon-list-alt logo-medium"></span>
                                             <h2>Reg.forms</h2>
-                                            <span class="badge">5</span>
+                                            <span class="badge">${surveys.size()}</span>
                                         </div>
                                     </a>
                                 </div>
@@ -60,7 +60,7 @@
                                         <div class="well text-center">
                                             <span class="glyphicon glyphicon-calendar logo-medium"></span>
                                             <h2>Visits</h2>
-                                            <span class="badge">4</span>
+                                            <span class="badge">0</span>
                                         </div>
                                     </a>
                                 </div>
