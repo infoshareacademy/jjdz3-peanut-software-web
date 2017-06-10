@@ -16,6 +16,8 @@ public class User {
     private Boolean admin;
     private LocalDateTime creationTime;
 
+
+
     @PrePersist
     void create() {
         admin = false;
@@ -52,5 +54,9 @@ public class User {
 
     public void setCreationTime(LocalDateTime creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public long getId() {
+        return id;
     }
 }
