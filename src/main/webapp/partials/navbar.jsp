@@ -14,13 +14,13 @@
         </div>
         <div class="collapse navbar-collapse navHeaderCollapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="index.html#about">ABOUT US</a></li>
+                <li><a href="#about">ABOUT US</a></li>
                 <li><a href="#">APPOINTMENTS</a></li>
                 <li><a href="#">NEW PATIENTS</a></li>
                 <li><a href="#">PRESCRIPTIONS</a></li>
-                <li><a href="index.html#services">SERVICES</a></li>
-                <li><a href="index.html#staff">STAFF</a></li>
-                <li><a href="index.html#contact">CONTACT</a></li>
+                <li><a href="#services">SERVICES</a></li>
+                <li><a href="#staff">STAFF</a></li>
+                <li><a href="#contact">CONTACT</a></li>
                 <li>
                     <div class="g-signin2" data-onsuccess="onSignIn"></div>
                 </li>

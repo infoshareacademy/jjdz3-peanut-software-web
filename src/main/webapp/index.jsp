@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +10,9 @@
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext" rel="stylesheet">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id"
           content="174879287253-49bn9ascj5832eil8u652gdbk20bve2g.apps.googleusercontent.com">
@@ -33,11 +38,48 @@
                 <li><a href="#services">SERVICES</a></li>
                 <li><a href="#staff">STAFF</a></li>
                 <li><a href="#contact">CONTACT</a></li>
-                <li>
-                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                </li>
+
+                <c:choose>
+                <c:when test="${logged}">
+
+                    <li><a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/peanut/logout">Logout</a></li>
+
+                </c:when>
+                    <c:otherwise>
+                        <li>
+                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+
             </ul>
         </div>
+
+        <script>
+            //google callback. This function will redirect to our login servlet
+            function onSignIn(googleUser) {
+                var profile = googleUser.getBasicProfile();
+                console.log('ID: ' + profile.getId());
+                console.log('Name: ' + profile.getName());
+                console.log('Image URL: ' + profile.getImageUrl());
+                console.log('Email: ' + profile.getEmail());
+                console.log('id_token: ' + googleUser.getAuthResponse().id_token);
+
+                //do not post all above info to the server because that is not secure.
+                //just send the id_token
+
+                var redirectUrl = '/peanut/login';
+
+//                using jquery to post data dynamically
+                var form = $('<form action="' + redirectUrl + '" method="post">' +
+                    '<input type="text" name="id_token" value="' +
+                    googleUser.getAuthResponse().id_token + '" />' +
+                    '</form>');
+                $('body').append(form);
+                form.submit();
+            }
+        </script>
+
     </div>
 </nav>
 
