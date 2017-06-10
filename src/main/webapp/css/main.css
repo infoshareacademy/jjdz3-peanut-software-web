@@ -42,6 +42,11 @@ body {
     font-size: 50px;
 }
 
+.logo-medium {
+    color: #1dadd1;
+    font-size: 100px;
+}
+
 @media screen and (max-width: 768px) {
     .col-sm-4 {
         text-align: center;
@@ -123,4 +128,19 @@ footer .glyphicon {
     text-transform: uppercase;
     line-height: 1.42857143 !important;
     letter-spacing: 2px;
+}
+
+.btn:hover, .navbar-nav li.active a {
+    color: #1dadd1 !important;
+    background-color: #fff !important;
+}
+
+.nav-pills li a:hover, .nav-pils li.active a {
+    color: #1dadd1 !important;
+    background-color: #fff !important;
+}
+
+.badge {
+    color: #1dadd1;
+    font-size: 40px;
 }
