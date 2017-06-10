@@ -68,7 +68,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("userName", name);
             session.setAttribute("logged", true);
             req.getServletContext()
-                    .getRequestDispatcher("/index4.jsp").forward(req, resp);
+                    .getRequestDispatcher("/index.jsp").forward(req, resp);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
