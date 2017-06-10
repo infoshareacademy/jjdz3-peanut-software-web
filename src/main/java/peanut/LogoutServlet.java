@@ -25,6 +25,6 @@ public class LogoutServlet extends HttpServlet {
         String sessionId = request.getSession().getId();
         System.out.println("sessioId:"+sessionId);
 
-        request.getRequestDispatcher("index3.jsp").forward(request, response);
+        response.sendRedirect("/peanut");
     }
 }

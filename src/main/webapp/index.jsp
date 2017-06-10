@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,9 +38,20 @@
                 <li><a href="#services">SERVICES</a></li>
                 <li><a href="#staff">STAFF</a></li>
                 <li><a href="#contact">CONTACT</a></li>
-                <li>
-                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                </li>
+
+                <c:choose>
+                <c:when test="${logged}">
+
+                    <li><a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/peanut/logout">Logout</a></li>
+
+                </c:when>
+                    <c:otherwise>
+                        <li>
+                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                        </li>
+                    </c:otherwise>
+                </c:choose>
+
             </ul>
         </div>
 
@@ -57,13 +70,13 @@
 
                 var redirectUrl = '/peanut/login';
 
-                //using jquery to post data dynamically
-//                var form = $('<form action="' + redirectUrl + '" method="post">' +
-//                    '<input type="text" name="id_token" value="' +
-//                    googleUser.getAuthResponse().id_token + '" />' +
-//                    '</form>');
-//                $('body').append(form);
-//                form.submit();
+//                using jquery to post data dynamically
+                var form = $('<form action="' + redirectUrl + '" method="post">' +
+                    '<input type="text" name="id_token" value="' +
+                    googleUser.getAuthResponse().id_token + '" />' +
+                    '</form>');
+                $('body').append(form);
+                form.submit();
             }
         </script>
 
@@ -265,6 +278,5 @@
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 </body>
 </html>

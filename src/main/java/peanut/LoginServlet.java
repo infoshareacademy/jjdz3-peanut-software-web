@@ -52,23 +52,24 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            String idToken = req.getParameter("id_token");
-            GoogleIdToken.Payload payLoad = IdTokenVerifierAndParser.getPayload(idToken);
-            String name = (String) payLoad.get("name");
-            String email = payLoad.getEmail();
-            System.out.println("User name: " + name);
-            System.out.println("User email: " + email);
+//            String idToken = req.getParameter("id_token");
+//            GoogleIdToken.Payload payLoad = IdTokenVerifierAndParser.getPayload(idToken);
+//            String name = (String) payLoad.get("name");
+//            String email = payLoad.getEmail();
+//            System.out.println("User name: " + name);
+//            System.out.println("User email: " + email);
 
-            User user = new User();
-            user.setName(name);
-            user.setEmail(email);
-            storage.add(user);
+//            User user = new User();
+//            user.setName(name);
+//            user.setEmail(email);
+//            storage.add(user);
 
             HttpSession session = req.getSession(true);
-            session.setAttribute("userName", name);
+//            session.setAttribute("userName", name);
             session.setAttribute("logged", true);
-            req.getServletContext()
-                    .getRequestDispatcher("/index.jsp").forward(req, resp);
+            req.setAttribute("logged", true);
+
+            resp.sendRedirect("/peanut");
 
         } catch (Exception e) {
             throw new RuntimeException(e);
