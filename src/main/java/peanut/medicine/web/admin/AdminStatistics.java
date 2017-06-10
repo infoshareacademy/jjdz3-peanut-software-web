@@ -1,6 +1,7 @@
 package peanut.medicine.web.admin;
 
 import peanut.medicine.web.survey.Survey;
+import peanut.medicine.web.user.User;
 
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
@@ -21,6 +22,13 @@ public class AdminStatistics {
                 .createQuery("select distinct s from Survey s", Survey.class)
                 .getResultList();
         return surveys;
+    }
+
+    public List<User> getAllUsers() {
+        List<User> users = em
+                .createQuery("select distinct u from User u", User.class)
+                .getResultList();
+        return users;
     }
 
 //    void getNumberPatientsForSpec() {

@@ -1,6 +1,7 @@
 package peanut.medicine.web.admin;
 
 import peanut.medicine.web.survey.Survey;
+import peanut.medicine.web.user.User;
 
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
@@ -25,10 +26,10 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Survey> surveys = statistics.getAllSurveys();
-//        List<Survey> users = statistics.getAllUsers();
+        List<User> users = statistics.getAllUsers();
 
         request.setAttribute("surveys", surveys);
-//        request.setAttribute("users", users);
+        request.setAttribute("users", users);
 
         request.getRequestDispatcher("admin.jsp").forward(request,response);
     }

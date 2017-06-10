@@ -103,12 +103,46 @@
 
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="registerForms">
                 <div class="panel-heading"><h3>REGISTRATION FORMS</h3></div>
+                <c:forEach var="survey" items="${surveys}">
+                    <div class="well">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">${name}
+                                    <tr>
+                                    <tr> ${surname}
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <p>Pesel: ${pesel}</p>
+                                <p>Sex: ${sex}</p>
+                                <p>Email: ${email}</p>
+                                <p>Prefered doctor's specialization: ${preferedSpecialization}</p>
+                                <p>Prefered day: ${preferedDay}</p>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+
+
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="visits">
                 <div class="panel-heading"><h3>VISITS</h3></div>
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="users">
                 <div class="panel-heading"><h3>USERS</h3></div>
+                <c:forEach var="user" items="${users}">
+                    <div class="well">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">${user.name}</div>
+                            </div>
+                            <div class="panel-body">
+                                <p>Email: ${user.email}</p>
+                                <p>Admin: ${user.admin}</p>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="doctors">
                 <div class="panel-heading"><h3>DOCTORS</h3></div>
