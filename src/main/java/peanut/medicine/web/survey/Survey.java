@@ -63,6 +63,7 @@ public class Survey {
         this.pesel = pesel;
     }
 
+    @NotBlank(message = "Specialization missing")
     public String getPreferedSpecialization() {
         return preferedSpecialization;
     }
@@ -71,6 +72,7 @@ public class Survey {
         this.preferedSpecialization = preferedSpecialization;
     }
 
+    @NotBlank(message = "Prefered day missing")
     public String getPreferedDay() {
         return preferedDay;
     }
