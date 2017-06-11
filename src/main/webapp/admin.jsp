@@ -107,17 +107,17 @@
                     <div class="well">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <div class="panel-title">${name}
+                                <div class="panel-title">${survey.name}
                                     <tr>
-                                    <tr> ${surname}
+                                    <tr> ${survey.surname}
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <p>Pesel: ${pesel}</p>
-                                <p>Sex: ${sex}</p>
-                                <p>Email: ${email}</p>
-                                <p>Prefered doctor's specialization: ${preferedSpecialization}</p>
-                                <p>Prefered day: ${preferedDay}</p>
+                                <p>Pesel: ${survey.pesel}</p>
+                                <p>Sex: ${survey.sex}</p>
+                                <p>Email: ${survey.email}</p>
+                                <p>Prefered doctor's specialization: ${survey.preferedSpecialization}</p>
+                                <p>Prefered day: ${survey.preferedDay}</p>
                             </div>
                         </div>
                     </div>

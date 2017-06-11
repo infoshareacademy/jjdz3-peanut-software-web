@@ -34,7 +34,7 @@
                 <li><a href="#about">ABOUT US</a></li>
                 <li><a href="#">APPOINTMENTS</a></li>
                 <li><a href="survey">NEW PATIENTS</a></li>
-                <li><a href="#">PRESCRIPTIONS</a></li>
+                <%--<li><a href="#">PRESCRIPTIONS</a></li>--%>
                 <li><a href="#services">SERVICES</a></li>
                 <li><a href="#staff">STAFF</a></li>
                 <li><a href="#contact">CONTACT</a></li>
@@ -42,7 +42,7 @@
                 <c:choose>
                 <c:when test="${logged}">
 
-                    <li><a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/peanut/logout">Logout</a></li>
+                    <li><a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/peanut/logout">SIGN OUT</a></li>
 
                 </c:when>
                     <c:otherwise>
@@ -51,7 +51,7 @@
                         </li>
                     </c:otherwise>
                 </c:choose>
-
+                <li><a href="admin"><span class="glyphicon glyphicon-text-background"></span></a></li>
             </ul>
         </div>
 
