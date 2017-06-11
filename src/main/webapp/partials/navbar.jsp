@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}">
                 <span class="glyphicon glyphicon-link"></span> PEANUT MEDICINE</a>
         </div>
         <div class="collapse navbar-collapse navHeaderCollapse">
@@ -17,13 +17,14 @@
                 <li><a href="${pageContext.request.contextPath}#about">ABOUT US</a></li>
                 <li><a href="#">APPOINTMENTS</a></li>
                 <li><a href="survey">NEW PATIENTS</a></li>
-                <li><a href="#">PRESCRIPTIONS</a></li>
+                <%--<li><a href="#">PRESCRIPTIONS</a></li>--%>
                 <li><a href="${pageContext.request.contextPath}#services">SERVICES</a></li>
                 <li><a href="${pageContext.request.contextPath}#staff">STAFF</a></li>
                 <li><a href="${pageContext.request.contextPath}#contact">CONTACT</a></li>
                 <li>
                     <div class="g-signin2" data-onsuccess="onSignIn"></div>
                 </li>
+                <li><a href="admin"><span class="glyphicon glyphicon-text-background"></span></a></li>
             </ul>
         </div>
     </div>
