@@ -28,8 +28,6 @@
             <groupId>com.infoshareacademy</groupId>
             <artifactId>peanut.medicine</artifactId>
             <version>1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/peanut.medicine-1.0-jar-with-dependencies.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
@@ -85,11 +83,6 @@
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-oauth2</artifactId>
             <version>v2-rev120-1.22.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.api-client</groupId>
-            <artifactId>google-api-client</artifactId>
-            <version>1.22.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.apis</groupId>
@@ -161,6 +154,29 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <executions>
+                    <execution>
+                        <id>install-external</id>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <file>${project.basedir}/lib/peanut.medicine-1.0-jar-with-dependencies.jar</file>
+                            <repositoryLayout>default</repositoryLayout>
+                            <groupId>com.infoshareacademy</groupId>
+                            <artifactId>peanut.medicine</artifactId>
+                            <version>1.0</version>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
+                        </configuration>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.19.1</version>
                 <executions>
@@ -183,6 +199,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
@@ -256,6 +273,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mysql.version>6.0.6</mysql.version>
         <wildfly.version>10.1.0.Final</wildfly.version>
         <wildfly.home>${project.build.directory}/wildfly-${wildfly.version}</wildfly.home>
