@@ -1,0 +1,17 @@
+db:
+  image: mysql
+  command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --init-connect='SET NAMES UTF8;' --innodb-flush-log-at-trx-commit=0
+  container_name: peanut_db
+  environment:
+   - MYSQL_ROOT_PASSWORD=root
+   - MYSQL_DATABASE=peanut
+   - MYSQL_USER=peanut_user
+   - MYSQL_PASSWORD=admin
+  ports:
+    - 3306:3306
+
+#    to remove previous container use (in project directory):
+#    docker-compose rm -fsv
+#
+#    to build new container with peanut db use (in project directory):
+#    docker-compose up -d
