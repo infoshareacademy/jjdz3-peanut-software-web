@@ -26,7 +26,9 @@
                     </c:when>
                     <c:otherwise>
                         <li>
-                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                            <a href="javascript:void(0)" onclick="renderGmail();"> SignUp with Gmail</a>
+                            <div class="my-signin2"></div>
+                            <%--<div class="g-signin2" data-onsuccess="onSignIn"></div>--%>
                         </li>
                     </c:otherwise>
                 </c:choose>
@@ -59,6 +61,32 @@
                 $('body').append(form);
                 form.submit();
             }
+
+            function onSuccessG(googleUser) {
+                var profile = googleUser.getBasicProfile();
+                console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                console.log('Name: ' + profile.getName());
+                console.log('Image URL: ' + profile.getImageUrl());
+                console.log('Email: ' + profile.getEmail());
+            }
+
+            function onFailureG(error) {
+                console.log(error);
+            }
+
+            function renderGmail() {
+
+                gapi.signin2.render('my-signin2', {
+                    'scope': 'https://www.googleapis.com/auth/plus.login',
+                    'width': 0,
+                    'height': 0,
+                    'longtitle': true,
+                    'theme': 'dark',
+                    'onsuccess': onSuccessG,
+                    'onfailure': onFailureG
+                });
+            }
+
         </script>
 
     </div>

@@ -34,17 +34,19 @@ public class SurveyServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession(true);
-        String loggedString = session.getAttribute("logged").toString();
-        boolean isLooged = !loggedString.isEmpty();
-
-        System.out.println("logged:"+session.getAttribute("logged"));
-        System.out.println("name:"+session.getAttribute("name"));
-        System.out.println("email:"+session.getAttribute("email"));
-
-        if(isLooged)
+        Optional<Object> logged = Optional.ofNullable(session.getAttribute("logged"));
+        if(logged.isPresent())
         {
-            req.setAttribute("name", session.getAttribute("name"));
-            req.setAttribute("email", session.getAttribute("email"));
+            boolean isLogged = !logged.get().toString().isEmpty();
+            if(isLogged)
+            {
+                System.out.println("logged:"+session.getAttribute("logged"));
+                System.out.println("name:"+session.getAttribute("name"));
+                System.out.println("email:"+session.getAttribute("email"));
+
+                req.setAttribute("name", session.getAttribute("name"));
+                req.setAttribute("email", session.getAttribute("email"));
+            }
         }
 
         req.setCharacterEncoding("UTF-8");

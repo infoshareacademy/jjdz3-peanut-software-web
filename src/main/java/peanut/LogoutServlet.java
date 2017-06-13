@@ -20,12 +20,7 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        request.getSession().invalidate();
-        request.getSession().setAttribute("logged", false);
-
-        System.out.println("logged:"+session.getAttribute("logged"));
-        System.out.println("name:"+session.getAttribute("name"));
-        System.out.println("email:"+session.getAttribute("email"));
+        session.invalidate();
 
         String referer = request.getHeader("Referer");
         if(referer == null || referer.isEmpty())
