@@ -26,38 +26,28 @@ public class LoginServlet extends HttpServlet {
     UserStore storage;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String sessionId = request.getSession().getId();
+    protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Boolean logged;
-        Optional<Object> loggedObj = Optional.ofNullable(request.getSession().getAttribute("logged"));
-        if(loggedObj.isPresent())
-        {
-            logged = true;
-
-        } else {
-            logged = false;
-        }
-
-        request.setAttribute("logged", logged);
-        System.out.println("sessioId:"+sessionId);
-        System.out.println("logged:"+logged);
-        request.getRequestDispatcher("index3.jsp").forward(request, response);
-    }
-
-
-    @Override
-    protected void doPost (HttpServletRequest req,
-                           HttpServletResponse resp)
-            throws ServletException, IOException {
+        String name;
+        String email;
+        String imageUrl = req.getParameter("imageUrl");
 
         try {
             String idToken = req.getParameter("id_token");
-            GoogleIdToken.Payload payLoad = IdTokenVerifierAndParser.getPayload(idToken);
-            String name = (String) payLoad.get("name");
-            String email = payLoad.getEmail();
+            try {
+                GoogleIdToken.Payload payLoad = IdTokenVerifierAndParser.getPayload(idToken);
+                name = (String) payLoad.get("name");
+                email = payLoad.getEmail();
+
+            } catch (IllegalArgumentException e)
+            {
+                name = req.getParameter("name");
+                email = req.getParameter("email");
+            }
+
             System.out.println("User name: " + name);
             System.out.println("User email: " + email);
+            System.out.println("imageUrl: " + imageUrl);
 
             User user = new User();
             user.setName(name);
@@ -65,11 +55,21 @@ public class LoginServlet extends HttpServlet {
             storage.add(user);
 
             HttpSession session = req.getSession(true);
-//            session.setAttribute("userName", name);
             session.setAttribute("logged", true);
-            req.setAttribute("logged", true);
+            session.setAttribute("name", name);
+            session.setAttribute("email", email);
 
-            resp.sendRedirect("/peanut");
+            System.out.println("logged:"+session.getAttribute("logged"));
+            System.out.println("name:"+session.getAttribute("name"));
+            System.out.println("email:"+session.getAttribute("email"));
+
+            String referer = req.getHeader("Referer");
+            if(referer == null || referer.isEmpty())
+            {
+                referer = "/peanut";
+            }
+
+            resp.sendRedirect(referer);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
