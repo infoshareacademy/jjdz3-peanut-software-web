@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN" name="FirstJEEProject">
+<Configuration status="WARN" name="peanut">
         <Appenders>
             <Console name="Console" target="SYSTEM_OUT">
                 <PatternLayout pattern="%highlight{%d | %-18marker [%-5level] %-27logger{1.} [%t:%line] %enc{%msg}%n%throwable}{FATAL=brown, ERROR=red, WARN=yellow, INFO=white, DEBUG=green, TRACE=cyan}"/>

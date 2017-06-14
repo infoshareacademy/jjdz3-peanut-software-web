@@ -40,11 +40,13 @@ public class SurveyServlet extends HttpServlet{
             boolean isLogged = !logged.get().toString().isEmpty();
             if(isLogged)
             {
-                System.out.println("logged:"+session.getAttribute("logged"));
-                System.out.println("name:"+session.getAttribute("name"));
-                System.out.println("email:"+session.getAttribute("email"));
+                LOGGER.debug("logged:"+session.getAttribute("logged"));
+                LOGGER.debug("name:"+session.getAttribute("name"));
+                LOGGER.debug("email:"+session.getAttribute("email"));
+                LOGGER.debug("admin:"+session.getAttribute("admin"));
 
                 req.setAttribute("name", session.getAttribute("name"));
+                req.setAttribute("surname", session.getAttribute("surname"));
                 req.setAttribute("email", session.getAttribute("email"));
             }
         }

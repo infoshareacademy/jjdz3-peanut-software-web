@@ -20,74 +20,26 @@
                 <li><a href="${pageContext.request.contextPath}#services">SERVICES</a></li>
                 <li><a href="${pageContext.request.contextPath}#staff">STAFF</a></li>
                 <li><a href="${pageContext.request.contextPath}#contact">CONTACT</a></li>
+                <li>
                 <c:choose>
                     <c:when test="${logged}">
-                        <li><a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080${pageContext.request.contextPath}/logout">SIGN OUT</a></li>
+                        <a href="${pageContext.request.contextPath}/logout">SIGN OUT</a>
                     </c:when>
                     <c:otherwise>
-                        <li>
-                            <a href="javascript:void(0)" onclick="renderGmail();"> SignUp with Gmail</a>
-                            <div class="my-signin2"></div>
-                            <%--<div class="g-signin2" data-onsuccess="onSignIn"></div>--%>
-                        </li>
+                    <div id="gSignInWrapper">
+                        <span class="label">Sign in:</span>
+                        <div id="customBtn" class="customGPlusSignIn">
+                            <span class="icon"></span>
+                            <span class="buttonText">Google</span>
+                        </div>
+                    </div>
+                    <script>startApp();</script>
                     </c:otherwise>
                 </c:choose>
+                    <div id="name"></div>
+                </li>
                 <li><a href="admin"><span class="glyphicon glyphicon-text-background"></span></a></li>
             </ul>
         </div>
-
-        <script>
-            //google callback. This function will redirect to our login servlet
-            function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                console.log('ID: ' + profile.getId());
-                console.log('Name: ' + profile.getName());
-                console.log('Image URL: ' + profile.getImageUrl());
-                console.log('Email: ' + profile.getEmail());
-                console.log('id_token: ' + googleUser.getAuthResponse().id_token);
-
-                //do not post all above info to the server because that is not secure.
-                //just send the id_token
-
-                var redirectUrl = "${pageContext.request.contextPath}/login";
-
-//                using jquery to post data dynamically
-                var form = $('<form action="' + redirectUrl + '" method="post">' +
-                    '<input type="text" name="id_token" value="' + googleUser.getAuthResponse().id_token + '" />' +
-                    '<input type="text" name="name" value="' + profile.getName() + '" />' +
-                    '<input type="text" name="imageUrl" value="' + profile.getImageUrl() + '" />' +
-                    '<input type="text" name="email" value="' + profile.getEmail() + '" />' +
-                    '</form>');
-                $('body').append(form);
-                form.submit();
-            }
-
-            function onSuccessG(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-                console.log('Name: ' + profile.getName());
-                console.log('Image URL: ' + profile.getImageUrl());
-                console.log('Email: ' + profile.getEmail());
-            }
-
-            function onFailureG(error) {
-                console.log(error);
-            }
-
-            function renderGmail() {
-
-                gapi.signin2.render('my-signin2', {
-                    'scope': 'https://www.googleapis.com/auth/plus.login',
-                    'width': 0,
-                    'height': 0,
-                    'longtitle': true,
-                    'theme': 'dark',
-                    'onsuccess': onSuccessG,
-                    'onfailure': onFailureG
-                });
-            }
-
-        </script>
-
     </div>
 </nav>

@@ -13,13 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Optional;
+import org.apache.logging.log4j.Logger;
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 /**
  * Created by moody on 28.05.17.
  */
 @WebServlet(urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
+
+    private static final Logger LOGGER = getLogger(LoginServlet.class);
 
     @Inject
     @Default
@@ -28,7 +31,10 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        req.setCharacterEncoding("UTF-8");
+
         String name;
+        String surname;
         String email;
         String imageUrl = req.getParameter("imageUrl");
 
@@ -36,32 +42,41 @@ public class LoginServlet extends HttpServlet {
             String idToken = req.getParameter("id_token");
             try {
                 GoogleIdToken.Payload payLoad = IdTokenVerifierAndParser.getPayload(idToken);
-                name = (String) payLoad.get("name");
+                name = (String) payLoad.get("givenName");
+                surname = (String) payLoad.get("familyName");
                 email = payLoad.getEmail();
 
             } catch (IllegalArgumentException e)
             {
+                LOGGER.debug("IdTokenVerifierAndParser:"+e.getMessage());
+
                 name = req.getParameter("name");
+                surname = req.getParameter("surname");
                 email = req.getParameter("email");
             }
 
-            System.out.println("User name: " + name);
-            System.out.println("User email: " + email);
-            System.out.println("imageUrl: " + imageUrl);
+            LOGGER.debug("User name: " + name);
+            LOGGER.debug("User email: " + email);
+            LOGGER.debug("imageUrl: " + imageUrl);
 
-            User user = new User();
-            user.setName(name);
-            user.setEmail(email);
-            storage.add(user);
+            User newUser = new User();
+            newUser.setName(name);
+            newUser.setSurname(surname);
+            newUser.setEmail(email);
+            newUser.setAdmin(false);
+            User user = storage.add(newUser);
 
             HttpSession session = req.getSession(true);
             session.setAttribute("logged", true);
-            session.setAttribute("name", name);
-            session.setAttribute("email", email);
+            session.setAttribute("name", user.getName());
+            session.setAttribute("surname", user.getSurname());
+            session.setAttribute("email", user.getEmail());
+            session.setAttribute("admin", user.getAdmin());
 
-            System.out.println("logged:"+session.getAttribute("logged"));
-            System.out.println("name:"+session.getAttribute("name"));
-            System.out.println("email:"+session.getAttribute("email"));
+            LOGGER.debug("logged:"+session.getAttribute("logged"));
+            LOGGER.debug("name:"+session.getAttribute("name"));
+            LOGGER.debug("email:"+session.getAttribute("email"));
+            LOGGER.debug("admin:"+session.getAttribute("admin"));
 
             String referer = req.getHeader("Referer");
             if(referer == null || referer.isEmpty())
