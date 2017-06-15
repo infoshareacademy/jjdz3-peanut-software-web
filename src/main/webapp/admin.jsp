@@ -69,7 +69,7 @@
                                         <div class="well text-center">
                                             <span class="glyphicon glyphicon-user logo-medium"></span>
                                             <h2>Doctors</h2>
-                                            <span class="badge">4</span>
+                                            <span class="badge">${doctors.size()}</span>
                                         </div>
                                     </a>
                                 </div>
@@ -146,6 +146,18 @@
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="doctors">
                 <div class="panel-heading"><h3>DOCTORS</h3></div>
+                <c:forEach var="doctor" items="${doctors}">
+                    <div class="well">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">${doctor.name} ${doctor.surname}, MD</div>
+                            </div>
+                            <div class="panel-body">
+                                <p>Specialization: ${doctor.specialization}</p>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="statistics">
                 <div class="panel-heading"><h3>STATISTICS</h3></div>
