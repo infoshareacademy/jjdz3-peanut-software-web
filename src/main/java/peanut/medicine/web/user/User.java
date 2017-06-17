@@ -10,13 +10,12 @@ public class User {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
     private String name;
+    private String surname;
     @Column(unique=true)
     private String email;
     @Column(columnDefinition="tinyint(1) default 0")
     private Boolean admin;
     private LocalDateTime creationTime;
-
-
 
     @PrePersist
     void create() {
@@ -58,5 +57,13 @@ public class User {
 
     public long getId() {
         return id;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 }

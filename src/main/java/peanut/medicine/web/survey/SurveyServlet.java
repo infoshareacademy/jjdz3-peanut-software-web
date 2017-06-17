@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -31,6 +32,24 @@ public class SurveyServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        HttpSession session = req.getSession(true);
+        Optional<Object> logged = Optional.ofNullable(session.getAttribute("logged"));
+        if(logged.isPresent())
+        {
+            boolean isLogged = !logged.get().toString().isEmpty();
+            if(isLogged)
+            {
+                LOGGER.debug("logged:"+session.getAttribute("logged"));
+                LOGGER.debug("name:"+session.getAttribute("name"));
+                LOGGER.debug("email:"+session.getAttribute("email"));
+                LOGGER.debug("admin:"+session.getAttribute("admin"));
+
+                req.setAttribute("name", session.getAttribute("name"));
+                req.setAttribute("surname", session.getAttribute("surname"));
+                req.setAttribute("email", session.getAttribute("email"));
+            }
+        }
 
         req.setCharacterEncoding("UTF-8");
         req.getRequestDispatcher("survey.jsp").forward(req, resp);

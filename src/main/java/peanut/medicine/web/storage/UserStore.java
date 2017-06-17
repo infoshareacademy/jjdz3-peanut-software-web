@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 @Singleton
@@ -16,15 +17,19 @@ public class UserStore {
     private EntityManager em;
 
     @Transactional
-    public void add(User user) {
+    public User add(User newUser) {
 
+        User user;
         try {
-            em.createQuery("select u.email from User u where u.email = :email")
-                    .setParameter("email", user.getEmail()).getSingleResult();
+            TypedQuery<User> query = em.createQuery("select u from User u where u.email = :email",User.class);
+            user = query.setParameter("email", newUser.getEmail()).getSingleResult();
+
         } catch (NoResultException e)
         {
-            em.persist(user);
+            em.persist(newUser);
+            user = newUser;
         }
+        return user;
     }
 
 }

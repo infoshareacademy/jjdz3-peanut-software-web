@@ -16,13 +16,27 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="${pageContext.request.contextPath}#about">ABOUT US</a></li>
                 <li><a href="#">APPOINTMENTS</a></li>
-                <li><a href="survey">NEW PATIENTS</a></li>
-                <%--<li><a href="#">PRESCRIPTIONS</a></li>--%>
+                <li><a href="${pageContext.request.contextPath}/survey">NEW PATIENTS</a></li>
                 <li><a href="${pageContext.request.contextPath}#services">SERVICES</a></li>
                 <li><a href="${pageContext.request.contextPath}#staff">STAFF</a></li>
                 <li><a href="${pageContext.request.contextPath}#contact">CONTACT</a></li>
                 <li>
-                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                <c:choose>
+                    <c:when test="${logged}">
+                        <a href="${pageContext.request.contextPath}/logout">SIGN OUT</a>
+                    </c:when>
+                    <c:otherwise>
+                    <div id="gSignInWrapper">
+                        <span class="label">Sign in:</span>
+                        <div id="customBtn" class="customGPlusSignIn">
+                            <span class="icon"></span>
+                            <span class="buttonText">Google</span>
+                        </div>
+                    </div>
+                    <script>startApp();</script>
+                    </c:otherwise>
+                </c:choose>
+                    <div id="name"></div>
                 </li>
                 <li><a href="admin"><span class="glyphicon glyphicon-text-background"></span></a></li>
             </ul>

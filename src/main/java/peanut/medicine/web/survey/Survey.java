@@ -91,6 +91,7 @@ public class Survey {
         this.email = email;
     }
 
+    @NotBlank(message = "Choose your sex")
     public String getSex() {
         return sex;
     }

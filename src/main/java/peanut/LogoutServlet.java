@@ -18,13 +18,16 @@ public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession().invalidate();
-        request.getSession().setAttribute("logged", false);
 
-        System.out.println("logged:"+request.getSession().getAttribute("logged").toString());
-        String sessionId = request.getSession().getId();
-        System.out.println("sessioId:"+sessionId);
+        HttpSession session = request.getSession();
+        session.invalidate();
 
-        response.sendRedirect("/peanut");
+        String referer = request.getHeader("Referer");
+        if(referer == null || referer.isEmpty())
+        {
+            referer = "/peanut";
+        }
+
+        response.sendRedirect(referer);
     }
 }
