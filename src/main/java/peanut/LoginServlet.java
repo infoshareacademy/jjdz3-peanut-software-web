@@ -1,6 +1,7 @@
 package peanut;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import org.apache.logging.log4j.Logger;
 import peanut.medicine.web.storage.UserStore;
 import peanut.medicine.web.user.User;
 
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import org.apache.logging.log4j.Logger;
+
 import static org.apache.logging.log4j.LogManager.getLogger;
 
 /**
@@ -42,8 +43,8 @@ public class LoginServlet extends HttpServlet {
             String idToken = req.getParameter("id_token");
             try {
                 GoogleIdToken.Payload payLoad = IdTokenVerifierAndParser.getPayload(idToken);
-                name = (String) payLoad.get("givenName");
-                surname = (String) payLoad.get("familyName");
+                name = (String) payLoad.get("given_name");
+                surname = (String) payLoad.get("family_name");
                 email = payLoad.getEmail();
 
             } catch (IllegalArgumentException e)
