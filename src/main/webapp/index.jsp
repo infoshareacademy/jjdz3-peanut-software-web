@@ -3,85 +3,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Peanut Medical Center</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700&amp;subset=latin-ext" rel="stylesheet">
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id"
-          content="174879287253-49bn9ascj5832eil8u652gdbk20bve2g.apps.googleusercontent.com">
+    <jsp:include page="partials/meta.jsp"/>
 </head>
 <body id="welcome" data-spy="scroll" data-target=".navbar" data-offset="60">
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#welcome">
-                <span class="glyphicon glyphicon-link"></span> PEANUT MEDICINE</a>
-        </div>
-        <div class="collapse navbar-collapse navHeaderCollapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#about">ABOUT US</a></li>
-                <li><a href="#">APPOINTMENTS</a></li>
-                <li><a href="survey">NEW PATIENTS</a></li>
-                <%--<li><a href="#">PRESCRIPTIONS</a></li>--%>
-                <li><a href="#services">SERVICES</a></li>
-                <li><a href="#staff">STAFF</a></li>
-                <li><a href="#contact">CONTACT</a></li>
 
-                <c:choose>
-                <c:when test="${logged}">
-
-                    <li><a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080/peanut/logout">SIGN OUT</a></li>
-
-                </c:when>
-                    <c:otherwise>
-                        <li>
-                            <div class="g-signin2" data-onsuccess="onSignIn"></div>
-                        </li>
-                    </c:otherwise>
-                </c:choose>
-                <li><a href="admin"><span class="glyphicon glyphicon-text-background"></span></a></li>
-            </ul>
-        </div>
-
-        <script>
-            //google callback. This function will redirect to our login servlet
-            function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                console.log('ID: ' + profile.getId());
-                console.log('Name: ' + profile.getName());
-                console.log('Image URL: ' + profile.getImageUrl());
-                console.log('Email: ' + profile.getEmail());
-                console.log('id_token: ' + googleUser.getAuthResponse().id_token);
-
-                //do not post all above info to the server because that is not secure.
-                //just send the id_token
-
-                var redirectUrl = '/peanut/login';
-
-//                using jquery to post data dynamically
-                var form = $('<form action="' + redirectUrl + '" method="post">' +
-                    '<input type="text" name="id_token" value="' +
-                    googleUser.getAuthResponse().id_token + '" />' +
-                    '</form>');
-                $('body').append(form);
-                form.submit();
-            }
-        </script>
-
-    </div>
-</nav>
+<jsp:include page="partials/navbar.jsp"/>
 
 <div class="jumbotron text-center">
     <h1>Welcome to Peanut Medical Center</h1>
@@ -268,15 +194,7 @@
     </div>
 </div>
 
-<footer class="container-fluid text-center bg-grey">
-    <a href="#welcome" title="To Top">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-    </a>
-    <p>Copyright @ PeanutMedicine for infoShare Academy 2017</p>
-</footer>
-
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<jsp:include page="partials/footer.jsp"/>
 <script src="js/main.js"></script>
 </body>
 </html>
