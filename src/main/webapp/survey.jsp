@@ -71,10 +71,9 @@
                                 <select class="form-control selectpicker" name="preferedSpecialization"
                                         id="preferedSpecialization">
                                     <option value="" disabled selected>Choose preferred specialist</option>
-                                    <option value="dentist">dentist</option>
-                                    <option value="urologist">urologist</option>
-                                    <option value="internist">internist</option>
-                                    <option value="laryngologist">laryngologist</option>
+                                    <c:forEach var="specialization" items="${specializations}">
+                                        <option value="${specialization}">${specialization}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
