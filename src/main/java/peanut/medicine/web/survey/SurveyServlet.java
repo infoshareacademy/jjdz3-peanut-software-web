@@ -1,9 +1,9 @@
 package peanut.medicine.web.survey;
 
 import org.apache.logging.log4j.Logger;
+import peanut.medicine.web.admin.AdminStatistics;
 import peanut.medicine.web.storage.SurveyStore;
 
-import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +15,8 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import java.io.IOException;
-import java.util.*;
+import java.util.Optional;
+import java.util.Set;
 
 import static org.apache.logging.log4j.LogManager.getLogger;
 
@@ -27,6 +28,8 @@ public class SurveyServlet extends HttpServlet{
 
     @Inject
     SurveyStore storage;
+    @Inject
+    AdminStatistics statistics;
 
     private static final Logger LOGGER = getLogger(SurveyServlet.class);
 
@@ -52,6 +55,7 @@ public class SurveyServlet extends HttpServlet{
         }
 
         req.setCharacterEncoding("UTF-8");
+        req.setAttribute("specializations", statistics.getAllSpecializations());
         req.getRequestDispatcher("survey.jsp").forward(req, resp);
     }
 
@@ -68,6 +72,7 @@ public class SurveyServlet extends HttpServlet{
             LOGGER.debug(violations);
             req = copyParamsToAttribs(req);
             req.setAttribute("violations", violations);
+            req.setAttribute("specializations", statistics.getAllSpecializations());
             req.getRequestDispatcher("survey.jsp").forward(req, resp);
 
         } else {

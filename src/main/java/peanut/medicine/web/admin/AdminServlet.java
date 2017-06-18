@@ -1,5 +1,6 @@
 package peanut.medicine.web.admin;
 
+import peanut.medicine.doctor.Doctor;
 import peanut.medicine.web.survey.Survey;
 import peanut.medicine.web.user.User;
 
@@ -27,9 +28,11 @@ public class AdminServlet extends HttpServlet {
 
         List<Survey> surveys = statistics.getAllSurveys();
         List<User> users = statistics.getAllUsers();
+        List<Doctor> doctors = statistics.getAllDoctors();
 
         request.setAttribute("surveys", surveys);
         request.setAttribute("users", users);
+        request.setAttribute("doctors", doctors);
 
         request.getRequestDispatcher("admin.jsp").forward(request,response);
     }

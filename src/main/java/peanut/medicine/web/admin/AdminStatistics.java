@@ -1,11 +1,15 @@
 package peanut.medicine.web.admin;
 
+import peanut.medicine.doctor.Doctor;
 import peanut.medicine.web.survey.Survey;
 import peanut.medicine.web.user.User;
 
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -31,9 +35,35 @@ public class AdminStatistics {
         return users;
     }
 
-//    void getNumberPatientsForSpec() {
-//        ???
-//        em.createQuery("select new peanut.medicine.web.stats.SurveyStatistics(s.preferedSpecialization, (select count(s) from Survey s GROUP BY  s.preferedSpecialization)) from Survey s",Survey.class).getResultList();
-//    }
+    public List<String> getAllSpecializations() throws NullPointerException {
+        List<String> specializations = new ArrayList<>();
+        File folder = new File("src/main/resources/calendars");
+        String[] listOfFiles = folder.list();
+        if (listOfFiles != null) specializations = Arrays.asList(listOfFiles);
+        return specializations;
+    }
 
+    public List<Doctor> getAllDoctors() throws NullPointerException {
+        List<Doctor> doctors = new ArrayList<>();
+        List<String> specializations = this.getAllSpecializations();
+        for (String specialization : specializations) {
+            String folderPath = ("src/main/resources/calendars/" + specialization);
+//            String folderPath = getClass().getResource(("/calendars/" + specialization)).getPath();
+            File folder = new File(folderPath);
+            File[] listOfFiles = folder.listFiles();
+            if (listOfFiles != null) {
+                for (File file : listOfFiles) {
+                    if (file.isFile()) {
+                        String doctorIdentity = file.getName();
+                        String[] doctorIdentitySplitted = doctorIdentity.split("\\.");
+                        String doctorName = doctorIdentitySplitted[0];
+                        String doctorSurname = doctorIdentitySplitted[1];
+                        Doctor doc = new Doctor(doctorName, doctorSurname, specialization);
+                        doctors.add(doc);
+                    }
+                }
+            }
+        }
+        return doctors;
+    }
 }
