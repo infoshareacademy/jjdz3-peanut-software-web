@@ -5,6 +5,14 @@
     <artifactId>jjdz3-peanut-software-web</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+
+    <repositories>
+        <repository>
+            <id>local-maven-repo</id>
+            <url>file:///${project.basedir}/local-maven-repo</url>
+        </repository>
+    </repositories>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -245,14 +253,6 @@
         <wildfly.version>10.1.0.Final</wildfly.version>
         <wildfly.home>${project.build.directory}/wildfly-${wildfly.version}</wildfly.home>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>in-project</id>
-            <name>In Project Repository</name>
-            <url>file://${project.basedir}/libs</url>
-        </repository>
-    </repositories>
 
     <profiles>
         <profile>
