@@ -5,6 +5,14 @@
     <artifactId>jjdz3-peanut-software-web</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
+
+    <repositories>
+        <repository>
+            <id>local-maven-repo</id>
+            <url>file:///${project.basedir}/local-maven-repo</url>
+        </repository>
+    </repositories>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -17,13 +25,11 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api -->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <version>1.0.0.Final</version>
         </dependency>
-
         <dependency>
             <groupId>com.infoshareacademy</groupId>
             <artifactId>peanut.medicine</artifactId>
@@ -47,7 +53,6 @@
             <version>5.4.1.Final</version>
             <scope>provided</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -89,10 +94,6 @@
             <artifactId>google-api-services-plus</artifactId>
             <version>v1-rev453-1.22.0</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.google.api.client/google-api-client-googleapis-auth-oauth -->
-
-
         <!-- TESTS -->
         <dependency>
             <groupId>junit</groupId>
@@ -105,15 +106,12 @@
             <artifactId>arquillian-junit-container</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.0-api -->
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.0-api</artifactId>
             <version>1.0.1.Final</version>
             <scope>provided</scope>
         </dependency>
-
-
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
@@ -152,29 +150,6 @@
             </plugins>
         </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>2.5.2</version>
-                <executions>
-                    <execution>
-                        <id>install-external</id>
-                        <phase>process-resources</phase>
-                        <configuration>
-                            <file>${project.basedir}/lib/peanut.medicine-1.0-jar-with-dependencies.jar</file>
-                            <repositoryLayout>default</repositoryLayout>
-                            <groupId>com.infoshareacademy</groupId>
-                            <artifactId>peanut.medicine</artifactId>
-                            <version>1.0</version>
-                            <packaging>jar</packaging>
-                            <generatePom>true</generatePom>
-                        </configuration>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
