@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Created by Bartek on 2017-06-24.
@@ -29,10 +30,18 @@ public class AuthenticationFilter implements Filter {
         this.context.log("Requested Resource::"+uri);
 
         HttpSession session = req.getSession(false);
+        Boolean isAdmin = false;
+        if(session != null)
+        {
+            Optional<Object> adminAttr = Optional.ofNullable(session.getAttribute("admin"));
+            isAdmin = adminAttr.isPresent() ? Boolean.valueOf(adminAttr.toString()) : false;
+        }
 
-        if(session == null && !(uri.endsWith("html") || uri.endsWith("LoginServlet"))){
+        if(session == null || !isAdmin){
             this.context.log("Unauthorized access request");
-            res.sendRedirect("login.html");
+            this.context.log("isAdmin:" + isAdmin);
+
+            ((HttpServletResponse) response).sendRedirect("/peanut");
         }else{
             // pass the request along the filter chain
             chain.doFilter(request, response);
