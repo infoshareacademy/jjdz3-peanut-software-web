@@ -161,6 +161,22 @@
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="statistics">
                 <div class="panel-heading"><h3>STATISTICS</h3></div>
+                <c:forEach var="specializations" items="${specializations}">
+                    <div class="well">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">${specializations.preferedSpecialization}
+                                    <tr>
+                                    <tr> ${specializations.preferedSpecialization}
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <p>Prefered doctor's specialization: ${survey.preferedSpecialization}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="settings">
                 <div class="panel-heading"><h3>Setings</h3></div>

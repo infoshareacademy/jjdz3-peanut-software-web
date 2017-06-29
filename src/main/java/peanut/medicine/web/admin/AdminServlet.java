@@ -29,10 +29,13 @@ public class AdminServlet extends HttpServlet {
         List<Survey> surveys = statistics.getAllSurveys();
         List<User> users = statistics.getAllUsers();
         List<Doctor> doctors = statistics.getAllDoctors();
+        List<Survey> specializations = statistics.getAllSpecializations1();
 
         request.setAttribute("surveys", surveys);
         request.setAttribute("users", users);
         request.setAttribute("doctors", doctors);
+        request.setAttribute("specializations", specializations);
+
 
         request.getRequestDispatcher("admin.jsp").forward(request,response);
     }
