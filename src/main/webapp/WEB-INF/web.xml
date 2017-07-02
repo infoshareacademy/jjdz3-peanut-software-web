@@ -13,27 +13,14 @@
     </welcome-file-list>
 
     <filter>
-        <filter-name>RequestLoggingFilter</filter-name>
-        <filter-class>peanut.medicine.web.servlet.filters.RequestLoggingFilter</filter-class>
-    </filter>
-    <filter>
-        <filter-name>AuthenticationFilter</filter-name>
-        <filter-class>peanut.medicine.web.servlet.filters.AuthenticationFilter</filter-class>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>peanut.medicine.web.servlet.filters.AdminFilter</filter-class>
     </filter>
 
     <filter-mapping>
-        <filter-name>RequestLoggingFilter</filter-name>
-        <servlet-name>SurveyServlet</servlet-name>
+        <filter-name>AdminFilter</filter-name>
         <url-pattern>/admin</url-pattern>
         <url-pattern>/admin/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
-
-    <filter-mapping>
-        <filter-name>AuthenticationFilter</filter-name>
-        <url-pattern>/admin</url-pattern>
-        <url-pattern>/admin/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
 
 </web-app>
