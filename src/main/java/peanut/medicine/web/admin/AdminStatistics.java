@@ -1,6 +1,5 @@
 package peanut.medicine.web.admin;
 
-import jdk.nashorn.internal.runtime.Specialization;
 import peanut.medicine.doctor.Doctor;
 import peanut.medicine.web.survey.Survey;
 import peanut.medicine.web.user.User;
@@ -9,10 +8,7 @@ import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.File;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Mariusz Szymanski on 2017-06-10
@@ -69,11 +65,12 @@ public class AdminStatistics {
         return doctors;
     }
 
-    public List<Survey> getAllSpecializations1() throws NullPointerException {
-        List<Survey> specializations = em
-                .createQuery("SELECT preferedSpecialization, count(preferedSpecialization) FROM Survey  group BY preferedSpecialization", Survey.class)
-                .getResultList();
-        return specializations;
+    public Map<String, Integer> getAdminStatistics() throws NullPointerException {
+        Map<String, Integer> adminstatistics = (Map<String, Integer>) em
+                .createQuery
+                ("SELECT s.preferedSpecialization, count(s.preferedSpecialization) as number  FROM Survey s group BY s.preferedSpecialization").getResultList();
+
+        return adminstatistics;
     }
 
 }
