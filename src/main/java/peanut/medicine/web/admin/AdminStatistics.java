@@ -1,5 +1,6 @@
 package peanut.medicine.web.admin;
 
+import org.omg.PortableInterceptor.INACTIVE;
 import peanut.medicine.doctor.Doctor;
 import peanut.medicine.web.survey.Survey;
 import peanut.medicine.web.user.User;
@@ -65,12 +66,22 @@ public class AdminStatistics {
         return doctors;
     }
 
-    public Map<String, Integer> getAdminStatistics() throws NullPointerException {
-        Map<String, Integer> adminstatistics = (Map<String, Integer>) em
+    public Map<String, Long> getAdminStatistics() throws NullPointerException {
+        List<Object[]> result = em
                 .createQuery
-                ("SELECT s.preferedSpecialization, count(s.preferedSpecialization) as number  FROM Survey s group BY s.preferedSpecialization").getResultList();
+                ("SELECT s.preferedSpecialization, count(s.preferedSpecialization) as number FROM Survey s group BY s.preferedSpecialization").getResultList();
+        Map<String, Long> adminStatistics = new HashMap<>();
 
-        return adminstatistics;
+        for (Object[] object : result) {
+            String preferedSpec = (String) object[0];
+            Long value = (Long) object[1];
+            adminStatistics.put(preferedSpec, value);
+        }
+
+
+        System.out.println(adminStatistics.keySet());
+        System.out.println(adminStatistics.values());
+        return adminStatistics;
     }
 
 }

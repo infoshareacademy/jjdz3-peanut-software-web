@@ -31,13 +31,14 @@ public class AdminServlet extends HttpServlet {
         List<User> users = statistics.getAllUsers();
         List<Doctor> doctors = statistics.getAllDoctors();
         List<String> specializations = statistics.getAllSpecializations();
-        Map<String, Integer> adminstatistics = statistics.getAdminStatistics();
+        Map<String, Long> adminStatistics = statistics.getAdminStatistics();
 
         request.setAttribute("surveys", surveys);
         request.setAttribute("users", users);
         request.setAttribute("doctors", doctors);
         request.setAttribute("specializations", specializations);
-        request.setAttribute("adminstatistics", adminstatistics);
+        System.out.println(adminStatistics);
+        request.setAttribute("adminStatistics", adminStatistics);
 
 
         request.getRequestDispatcher("admin.jsp").forward(request,response);

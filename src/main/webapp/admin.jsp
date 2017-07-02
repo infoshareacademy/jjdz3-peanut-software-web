@@ -161,18 +161,17 @@
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="statistics">
                 <div class="panel-heading"><h3>STATISTICS</h3></div>
-                <c:forEach var="adminstatistics" items="${adminstatistics}">
+                <c:forEach var="adminStatistics" items="${adminStatistics}">
                     <div class="well">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <div class="panel-title">${adminstatistics.preferedSpecialization}
+                                <div class="panel-title">
                                     <tr>
-                                    <tr> ${adminstatistics.preferedSpecialization}
-                                    <tr> ${adminstatistics.number}
+                                    <tr> ${adminStatistics.key}
+                                    <tr> ${adminStatistics.value}
                                 </div>
                             </div>
                             <div class="panel-body">
-                                <p>Prefered doctor's specialization: ${survey.preferedSpecialization}</p>
 
                             </div>
                         </div>
