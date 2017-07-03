@@ -168,11 +168,10 @@
                                 <div class="panel-title">
                                     <tr>
                                     <tr> ${adminStatistics.key}
-                                    <tr> ${adminStatistics.value}
                                 </div>
                             </div>
                             <div class="panel-body">
-
+                                <tr> ${adminStatistics.value}
                             </div>
                         </div>
                     </div>
