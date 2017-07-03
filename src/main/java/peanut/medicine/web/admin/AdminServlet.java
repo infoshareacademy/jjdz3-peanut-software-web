@@ -37,7 +37,6 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("users", users);
         request.setAttribute("doctors", doctors);
         request.setAttribute("specializations", specializations);
-        System.out.println(adminStatistics);
         request.setAttribute("adminStatistics", adminStatistics);
 
 

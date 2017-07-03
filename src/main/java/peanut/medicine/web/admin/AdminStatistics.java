@@ -78,9 +78,6 @@ public class AdminStatistics {
             adminStatistics.put(preferedSpec, value);
         }
 
-
-        System.out.println(adminStatistics.keySet());
-        System.out.println(adminStatistics.values());
         return adminStatistics;
     }
 
