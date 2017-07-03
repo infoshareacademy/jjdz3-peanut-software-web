@@ -23,7 +23,7 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 /**
  * Created by Bartek on 2017-05-19.
  */
-@WebServlet("/survey")
+@WebServlet(name = "SurveyServlet", urlPatterns = "/survey")
 public class SurveyServlet extends HttpServlet{
 
     @Inject
