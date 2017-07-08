@@ -2,6 +2,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
+
+    <c:if test="${!logged}">
+        <div class="collapse navbar-collapse"><p class="bg-danger">&nbsp;Full site functionality available after log in!</p></div>
+    </c:if>
+
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
@@ -13,6 +18,7 @@
                 <span class="glyphicon glyphicon-link"></span> PEANUT MEDICINE</a>
         </div>
         <div class="collapse navbar-collapse navHeaderCollapse">
+
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="${pageContext.request.contextPath}#about">ABOUT US</a></li>
                 <li><a href="#">APPOINTMENTS</a></li>
