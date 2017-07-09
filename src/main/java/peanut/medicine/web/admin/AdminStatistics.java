@@ -1,6 +1,5 @@
 package peanut.medicine.web.admin;
 
-import org.omg.PortableInterceptor.INACTIVE;
 import peanut.medicine.doctor.Doctor;
 import peanut.medicine.web.survey.Survey;
 import peanut.medicine.web.user.User;
