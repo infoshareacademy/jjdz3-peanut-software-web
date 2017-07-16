@@ -118,6 +118,7 @@
                                 <p>Email: ${survey.email}</p>
                                 <p>Prefered doctor's specialization: ${survey.preferedSpecialization}</p>
                                 <p>Prefered day: ${survey.preferedDay}</p>
+                                <p><a href="/peanut/admin/appoint?survey=${survey.id}">Make appointment</a></p>
                             </div>
                         </div>
                     </div>

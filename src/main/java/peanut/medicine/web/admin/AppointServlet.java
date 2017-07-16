@@ -1,7 +1,10 @@
 package peanut.medicine.web.admin;
 
+import peanut.medicine.doctor.Doctor;
+import peanut.medicine.web.Agenda;
+import peanut.medicine.web.Appointment;
+import peanut.medicine.web.storage.SurveyStore;
 import peanut.medicine.web.survey.Survey;
-import peanut.medicine.web.user.User;
 
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
@@ -25,7 +28,28 @@ public class AppointServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<Survey> surveys = statistics.getAllSurveys();
-        List<User> users = statistics.getAllUsers();
+        List<Doctor> doctors = statistics.getAllDoctors();
+
+        SurveyStore surveyStore = new SurveyStore();
+        System.out.println(surveyStore);
+
+        System.out.println("survet:"+request.getParameter("survey"));
+
+        long surveyId = Long.parseLong(request.getParameter("survey"));
+
+        System.out.println("surveyId:"+surveyId);
+
+        Survey survey = surveyStore.get(surveyId);
+
+        Agenda agenda = new Agenda();
+        List<Appointment> proposedTerms = agenda.findBestTerms(survey, doctors);
+
+        for (Appointment proposedTerm : proposedTerms)
+        {
+
+            System.out.println(proposedTerm.toString());
+
+        }
+
     }
 }

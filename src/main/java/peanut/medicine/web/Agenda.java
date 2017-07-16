@@ -3,6 +3,7 @@ package peanut.medicine.web;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.Component;
 import org.slf4j.LoggerFactory;
+import peanut.medicine.doctor.Doctor;
 import peanut.medicine.web.iCalendar.IcalendarReaderICS;
 import peanut.medicine.web.survey.Survey;
 
@@ -25,17 +26,17 @@ public class Agenda {
 
     private IcalendarReaderICS IcalendarReader;
     private List<Doctor> doctors;
-    private List<Survey> surveyResults;
+    private List<Survey> surveys;
 
     public Agenda()
     {
         this.doctors = new ArrayList<Doctor>();
-        this.surveyResults = new ArrayList<Survey>();
+        this.surveys = new ArrayList<Survey>();
     }
 
     public List<Survey> getSurveys()
     {
-        return this.surveyResults;
+        return this.surveys;
     }
     
     public List<Doctor> getDoctors()
@@ -84,15 +85,15 @@ public class Agenda {
         return elementsDir.listFiles();
     }
 
-    public List<Appointment> findBestTerms (Survey surveyResult, List<Doctor> Alldoctors)
+    public List<Appointment> findBestTerms (Survey survey, List<Doctor> Alldoctors)
     {
         LOGGER.info("findBestTerms()");
-        LOGGER.debug("findBestTerms:surveyResult:"+ surveyResult.toString());
+        LOGGER.debug("findBestTerms:survey:"+ survey.toString());
         LOGGER.debug("findBestTerms:Alldoctors:"+Alldoctors);
 
         List<Appointment> appointments = new ArrayList<>();
-        String specialization = surveyResult.getPreferedSpecialization();
-        String preferedDay = surveyResult.getPreferedDay();
+        String specialization = survey.getPreferedSpecialization();
+        String preferedDay = survey.getPreferedDay();
         LOGGER.debug("findBestTerms:specialization:"+specialization);
 
         //take only doctor with specialization
@@ -134,7 +135,7 @@ public class Agenda {
 
             for (LocalDate term : terms)
             {
-                Appointment appointment = new Appointment(surveyResult, doctor, term);
+                Appointment appointment = new Appointment(survey, doctor, term);
                 appointments.add(appointment);
             }
         }
@@ -165,8 +166,8 @@ public class Agenda {
         return newTerms;
     }
 
-    public void addSurvey(Survey surveyResult)
+    public void addSurvey(Survey survey)
     {
-        this.surveyResults.add(surveyResult);
+        this.surveys.add(survey);
     }
 }

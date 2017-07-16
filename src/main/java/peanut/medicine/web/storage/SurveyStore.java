@@ -19,4 +19,14 @@ public class SurveyStore {
         em.persist(survey);
     }
 
+    public Survey get(long id)
+    {
+//        System.out.println(Survey.class);
+//        System.out.println(id);
+
+        Survey survey = new Survey(id);
+        return em.find(Survey.class, survey.getId());
+
+    }
+
 }

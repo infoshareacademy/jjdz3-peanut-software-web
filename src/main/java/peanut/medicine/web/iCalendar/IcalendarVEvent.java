@@ -10,8 +10,8 @@ import net.fortuna.ical4j.model.property.Version;
 import net.fortuna.ical4j.util.UidGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import peanut.medicine.doctor.Doctor;
 import peanut.medicine.web.Appointment;
-import peanut.medicine.web.Doctor;
 import peanut.medicine.web.survey.Survey;
 
 import java.io.File;

@@ -12,6 +12,11 @@ import java.time.LocalDateTime;
 @Entity
 public class Survey {
 
+    public Survey() {}
+    public Survey(long id) {
+        this.id =id;
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;

@@ -1,5 +1,6 @@
 package peanut.medicine.web;
 
+import peanut.medicine.doctor.Doctor;
 import peanut.medicine.web.survey.Survey;
 
 import java.time.LocalDate;
