@@ -1,6 +1,8 @@
 package peanut.medicine.web.admin;
 
 import peanut.medicine.doctor.Doctor;
+import peanut.medicine.web.Appointment;
+import peanut.medicine.web.storage.AppointmentStore;
 import peanut.medicine.web.survey.Survey;
 import peanut.medicine.web.user.User;
 
@@ -24,15 +26,20 @@ public class AdminServlet extends HttpServlet {
     @Inject @Default
     AdminStatistics statistics;
 
+    @Inject
+    AppointmentStore appointmentStore;
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Survey> surveys = statistics.getAllSurveys();
         List<User> users = statistics.getAllUsers();
         List<Doctor> doctors = statistics.getAllDoctors();
+        List<Appointment> appointments = appointmentStore.getFinalAppointments();
 
         request.setAttribute("surveys", surveys);
         request.setAttribute("users", users);
         request.setAttribute("doctors", doctors);
+        request.setAttribute("appointments", appointments);
 
         request.getRequestDispatcher("admin.jsp").forward(request,response);
     }

@@ -2,12 +2,14 @@ package peanut.medicine.web.survey;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import peanut.medicine.web.Appointment;
 import peanut.medicine.web.validation.constraints.Pesel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Survey {
@@ -29,6 +31,9 @@ public class Survey {
     private String preferedSpecialization;
     private String preferedDay;
     private LocalDateTime creationTime;
+
+    @OneToMany(mappedBy = "survey")
+    private List<Appointment> appointments;
 
     @PrePersist
     void create() {
@@ -119,5 +124,13 @@ public class Survey {
 
     public void setCreationTime(LocalDateTime creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 }

@@ -28,6 +28,7 @@ public class SurveyServlet extends HttpServlet{
 
     @Inject
     SurveyStore storage;
+
     @Inject
     AdminStatistics statistics;
 

@@ -23,7 +23,7 @@ public class AdminStatistics {
 
     public List<Survey> getAllSurveys() {
         List<Survey> surveys = em
-                .createQuery("select distinct s from Survey s", Survey.class)
+                .createQuery("select distinct s from Survey s left join fetch s.appointments", Survey.class)
                 .getResultList();
         return surveys;
     }
@@ -59,6 +59,7 @@ public class AdminStatistics {
                         String doctorName = doctorIdentitySplitted[0];
                         String doctorSurname = doctorIdentitySplitted[1];
                         Doctor doc = new Doctor(doctorName, doctorSurname, specialization);
+                        doc.setCalendarFile(file.getPath());
                         doctors.add(doc);
                     }
                 }

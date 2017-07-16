@@ -26,7 +26,7 @@ public class IcalendarVEvent {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(IcalendarVEvent.class);
 
-    public static void addVisitForDoctor(Appointment appointment) {
+    public void addVisitForDoctor(Appointment appointment) {
 
 //        Reading doctor calendar .ics file
         Doctor doctor = appointment.getDoctor();
@@ -70,7 +70,7 @@ public class IcalendarVEvent {
         LOGGER.info("Appointment added to Doctor " + doctor.getName() + " " + doctor.getSurname() + " calendar.");
     }
 
-    public static void generateInvitation(Appointment appointment) throws ParseException, SocketException, NullPointerException {
+    public void generateInvitation(Appointment appointment) throws ParseException, SocketException, NullPointerException {
 
         LOGGER.info("generateInvitation()");
         LOGGER.debug("generateInvitation:appointmnet:"+appointment.toString());
@@ -82,7 +82,7 @@ public class IcalendarVEvent {
         calendar.getProperties().add(CalScale.GREGORIAN);
 
         LocalDate term = appointment.getTerm();
-        Survey surveyResult = appointment.getSurvey();
+        Survey survey = appointment.getSurvey();
 
         java.util.Calendar calendar2 = java.util.Calendar.getInstance();
         calendar2.set(java.util.Calendar.MONTH, term.getMonthValue()-1);
@@ -103,7 +103,7 @@ public class IcalendarVEvent {
         String invitationsPath = classLoader.getResource("invitations").getPath();
         LOGGER.debug("generateInvitation:invitationsPath:"+invitationsPath.toString());
 
-        File icsFile = new File(invitationsPath+"/"+ surveyResult.getName()+""+ surveyResult.getSurname()+"-"+term.toString()+".ics");
+        File icsFile = new File(invitationsPath+"/"+ survey.getName()+""+ survey.getSurname()+"-"+term.toString()+".ics");
         LOGGER.debug("generateInvitation:icsFile:"+icsFile.getPath());
 
         IcalendarWriterICS IcalendarWriterICS = new IcalendarWriterICS();
