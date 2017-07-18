@@ -27,7 +27,7 @@ public class Appointment {
     private String doctorSpecialization;
     private String doctorCalendar;
     private LocalDate term;
-    private Boolean agreed;
+    private int selected;
 
     public Appointment(Survey survey, Doctor doctor, LocalDate term) {
         this.survey = survey;
@@ -37,9 +37,15 @@ public class Appointment {
         this.doctorSpecialization = doctor.getSpecialization();
         this.doctorCalendar = doctor.getCalendarFile();
         this.term = term;
+        this.selected = 0;
     }
 
     public Appointment() {
+    }
+
+    @Override
+    public String toString() {
+        return survey.getId() + ":" + doctorName + " " + doctorSurname + " " + doctorSpecialization + " " + term;
     }
 
     public Survey getSurvey() {
@@ -106,11 +112,11 @@ public class Appointment {
         this.doctorSpecialization = doctorSpecialization;
     }
 
-    public Boolean getAgreed() {
-        return agreed;
+    public int getSelected() {
+        return selected;
     }
 
-    public void setAgreed(Boolean agreed) {
-        this.agreed = agreed;
+    public void setSelected(int selected) {
+        this.selected = selected;
     }
 }

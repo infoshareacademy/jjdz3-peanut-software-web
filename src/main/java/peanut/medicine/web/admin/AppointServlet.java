@@ -50,10 +50,10 @@ public class AppointServlet extends HttpServlet {
         for (Appointment proposedTerm : proposedTerms)
         {
             appointmentStore.add(proposedTerm);
-            LOGGER.debug(proposedTerm.toString());
+            LOGGER.debug(proposedTerm.getTerm());
         }
 
-        request.getRequestDispatcher("admin.jsp").forward(request,response);
+        response.sendRedirect("/peanut/admin");
     }
 
     @Override

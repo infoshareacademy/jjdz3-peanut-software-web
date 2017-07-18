@@ -1,6 +1,9 @@
 package peanut.medicine.web.storage;
 
+import org.slf4j.LoggerFactory;
 import peanut.medicine.web.Appointment;
+import peanut.medicine.web.survey.Survey;
+
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,6 +12,8 @@ import java.util.List;
 
 @Default
 public class AppointmentStore {
+
+    private final static org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AppointmentStore.class);
 
     @PersistenceContext
     private EntityManager em;
@@ -21,14 +26,34 @@ public class AppointmentStore {
     public List<Appointment> getFinalAppointments()
     {
         return em
-                .createQuery("select a from Appointment a where a.agreed = true", Appointment.class)
+                .createQuery("select a from Appointment a where a.selected = 1", Appointment.class)
                 .getResultList();
     }
 
+    @Transactional
     public Appointment agreeToAppointment(long id)
     {
         Appointment appointment = em.find(Appointment.class, id);
-        appointment.setAgreed(true);
+        appointment.setSelected(1);
+
+        Survey survey = appointment.getSurvey();
+        long survey_id = survey.getId();
+
+        Appointment visit2delete =
+                em.createQuery("select a from Appointment a where a.survey = :survey and a.id <> :id", Appointment.class)
+                .setParameter("survey", survey)
+                .setParameter("id", id)
+                .getSingleResult();
+
+        System.out.println(visit2delete.toString());
+
+        this.delete(visit2delete);
         return appointment;
+    }
+
+    @Transactional
+    public void delete(Appointment appointment)
+    {
+        em.remove(appointment);
     }
 }

@@ -125,12 +125,12 @@
                                     </c:when>
 
                                     <c:when test="${survey.appointments.size() == 1}">
-                                        <p>${survey.appointments[0].doctorName} ${survey.appointments[0].term}</p>
+                                        <p>Planned visit: ${survey.appointments[0].doctorName} ${survey.appointments[0].doctorSurname} [${survey.appointments[0].doctorSpecialization}] - ${survey.appointments[0].term}</p>
                                     </c:when>
 
                                     <c:otherwise>
                                         <p>${survey.appointments[0].doctorName}</p>
-                                        <p>Choose one term:</p>
+                                        <p>Choose one term form proposed visits:</p>
                                         <form method="POST" action="/peanut/admin/appoint">
                                             <input type="radio" name="appointment" value="${survey.appointments[0].id}" checked> ${survey.appointments[0].term}
                                             <input type="radio" name="appointment" value="${survey.appointments[1].id}"> ${survey.appointments[1].term}
@@ -139,7 +139,6 @@
 
                                     </c:otherwise>
                                 </c:choose>
-
 
                             </div>
                         </div>
@@ -155,10 +154,10 @@
                     <div class="well">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <div class="panel-title">${appointment.survey.name}</div>
+                                <div class="panel-title">${appointment.survey.name} ${appointment.survey.surname}</div>
                             </div>
                             <div class="panel-body">
-                                <p>Doctor: ${appointment.doctorName}</p>
+                                <p>${appointment.doctorName} ${appointment.doctorSurname} [${appointment.doctorSpecialization}]</p>
                                 <p>Term: ${appointment.term}</p>
                             </div>
                         </div>
