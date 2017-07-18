@@ -32,10 +32,11 @@ public class IcalendarVEvent {
         Doctor doctor = appointment.getDoctor();
         String filename = doctor.getCalendarFile();
 
-        ClassLoader classLoader = doctor.getClass().getClassLoader();
-        String calendarsPath = classLoader.getResource("calendars").getPath();
+//        ClassLoader classLoader = appointment.getClass().getClassLoader();
+//        String calendarsPath = classLoader.getResource("calendars").getPath();
 
-        File icsFile = new File(calendarsPath+"/"+filename);
+//        File icsFile = new File(calendarsPath+"/"+filename);
+        File icsFile = new File(filename);
         IcalendarReaderICS iReader = new IcalendarReaderICS();
         Calendar doctorCalendar = iReader.readCalendar(icsFile);
 

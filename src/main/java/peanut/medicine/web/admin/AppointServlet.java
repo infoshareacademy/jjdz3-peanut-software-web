@@ -80,6 +80,7 @@ public class AppointServlet extends HttpServlet {
             LOGGER.error("generateInvitation Error"+ e.getMessage()+e.getCause());
         }
 
-        req.getRequestDispatcher("admin.jsp").forward(req,resp);
+        resp.sendRedirect("/peanut/admin");
+//        req.getRequestDispatcher("admin.jsp").forward(req,resp);
     }
 }

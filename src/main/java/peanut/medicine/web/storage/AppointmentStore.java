@@ -35,9 +35,7 @@ public class AppointmentStore {
     {
         Appointment appointment = em.find(Appointment.class, id);
         appointment.setSelected(1);
-
         Survey survey = appointment.getSurvey();
-        long survey_id = survey.getId();
 
         Appointment visit2delete =
                 em.createQuery("select a from Appointment a where a.survey = :survey and a.id <> :id", Appointment.class)
