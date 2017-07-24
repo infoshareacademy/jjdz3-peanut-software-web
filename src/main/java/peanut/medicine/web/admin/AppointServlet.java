@@ -81,6 +81,5 @@ public class AppointServlet extends HttpServlet {
         }
 
         resp.sendRedirect("/peanut/admin");
-//        req.getRequestDispatcher("admin.jsp").forward(req,resp);
     }
 }
