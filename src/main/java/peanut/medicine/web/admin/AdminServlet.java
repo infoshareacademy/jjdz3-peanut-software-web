@@ -24,10 +24,12 @@ public class AdminServlet extends HttpServlet {
 
     @Inject @Default
     AdminStatistics statistics;
+    @Inject @Default
+    PeanutRestApiClient apiClient;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<Survey> surveys = statistics.getAllSurveys();
+        List<Survey> surveys = apiClient.getAllSurveys();
         List<User> users = statistics.getAllUsers();
         List<Doctor> doctors = statistics.getAllDoctors();
         List<String> specializations = statistics.getAllSpecializations();
