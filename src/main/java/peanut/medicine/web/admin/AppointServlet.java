@@ -77,7 +77,7 @@ public class AppointServlet extends HttpServlet {
             icalendarVEvent.generateInvitation(appointment);
         } catch (Exception e)
         {
-            LOGGER.error("generateInvitation Error"+ e.getMessage()+e.getCause());
+            LOGGER.error("generateInvitation Error"+ e.getMessage() + e.getCause());
         }
 
         resp.sendRedirect("/peanut/admin");

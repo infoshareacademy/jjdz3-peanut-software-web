@@ -1,9 +1,11 @@
 package peanut.medicine.web.admin;
 
+import static org.apache.logging.log4j.LogManager.getLogger;
+import org.apache.logging.log4j.Logger;
 import peanut.medicine.doctor.Doctor;
+import peanut.medicine.web.iCalendar.IcalendarVEvent;
 import peanut.medicine.web.survey.Survey;
 import peanut.medicine.web.user.User;
-
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,11 +14,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+
 /**
  * Created by Mariusz Szymanski on 2017-06-10
  */
 @Default
 public class AdminStatistics {
+
+    private static final Logger LOGGER = getLogger(AdminStatistics.class);
 
     @PersistenceContext
     private EntityManager em;
@@ -37,7 +43,7 @@ public class AdminStatistics {
 
     public List<String> getAllSpecializations() throws NullPointerException {
         List<String> specializations = new ArrayList<>();
-        File folder = new File("src/main/resources/calendars");
+        File folder = new File(IcalendarVEvent.DOCTORS_CALENDARS_PATH);
         String[] listOfFiles = folder.list();
         if (listOfFiles != null) specializations = Arrays.asList(listOfFiles);
         return specializations;
@@ -47,8 +53,10 @@ public class AdminStatistics {
         List<Doctor> doctors = new ArrayList<>();
         List<String> specializations = this.getAllSpecializations();
         for (String specialization : specializations) {
-            String folderPath = ("src/main/resources/calendars/" + specialization);
-//            String folderPath = getClass().getResource(("/calendars/" + specialization)).getPath();
+
+            String folderPath = (IcalendarVEvent.DOCTORS_CALENDARS_PATH + specialization);
+            LOGGER.debug("Doctor calendars path:"+ folderPath);
+
             File folder = new File(folderPath);
             File[] listOfFiles = folder.listFiles();
             if (listOfFiles != null) {
@@ -59,7 +67,7 @@ public class AdminStatistics {
                         String doctorName = doctorIdentitySplitted[0];
                         String doctorSurname = doctorIdentitySplitted[1];
                         Doctor doc = new Doctor(doctorName, doctorSurname, specialization);
-                        doc.setCalendarFile(file.getPath());
+                        doc.setCalendarFile(specialization + "/" + file.getName());
                         doctors.add(doc);
                     }
                 }

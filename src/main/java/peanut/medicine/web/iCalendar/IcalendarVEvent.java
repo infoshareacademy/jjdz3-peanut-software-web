@@ -24,6 +24,10 @@ import java.time.LocalDate;
  */
 public class IcalendarVEvent {
 
+    // Class constant
+    public static final String DOCTORS_CALENDARS_PATH = "src/main/resources/calendars/";
+    public static final String PATIENT_INVITATIONS_PATH = "src/main/resources/invitations/";
+
     private final static Logger LOGGER = LoggerFactory.getLogger(IcalendarVEvent.class);
 
     public void addVisitForDoctor(Appointment appointment) {
@@ -31,12 +35,7 @@ public class IcalendarVEvent {
 //        Reading doctor calendar .ics file
         Doctor doctor = appointment.getDoctor();
         String filename = doctor.getCalendarFile();
-
-//        ClassLoader classLoader = appointment.getClass().getClassLoader();
-//        String calendarsPath = classLoader.getResource("calendars").getPath();
-
-//        File icsFile = new File(calendarsPath+"/"+filename);
-        File icsFile = new File(filename);
+        File icsFile = new File(DOCTORS_CALENDARS_PATH + filename);
         IcalendarReaderICS iReader = new IcalendarReaderICS();
         Calendar doctorCalendar = iReader.readCalendar(icsFile);
 
@@ -100,11 +99,7 @@ public class IcalendarVEvent {
         calendar.getComponents().add(visit);
 
         //save file
-        ClassLoader classLoader = appointment.getClass().getClassLoader();
-        String invitationsPath = classLoader.getResource("invitations").getPath();
-        LOGGER.debug("generateInvitation:invitationsPath:"+invitationsPath.toString());
-
-        File icsFile = new File(invitationsPath+"/"+ survey.getName()+""+ survey.getSurname()+"-"+term.toString()+".ics");
+        File icsFile = new File(PATIENT_INVITATIONS_PATH + survey.getName()+""+ survey.getSurname()+"-"+term.toString()+".ics");
         LOGGER.debug("generateInvitation:icsFile:"+icsFile.getPath());
 
         IcalendarWriterICS IcalendarWriterICS = new IcalendarWriterICS();
