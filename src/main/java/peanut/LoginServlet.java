@@ -2,6 +2,7 @@ package peanut;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import org.apache.logging.log4j.Logger;
+import peanut.medicine.web.admin.AdminStatistics;
 import peanut.medicine.web.storage.UserStore;
 import peanut.medicine.web.user.User;
 
@@ -28,6 +29,8 @@ public class LoginServlet extends HttpServlet {
     @Inject
     @Default
     UserStore storage;
+    @Inject @Default
+    AdminStatistics statistics;
 
     @Override
     protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -66,6 +69,7 @@ public class LoginServlet extends HttpServlet {
             newUser.setEmail(email);
             newUser.setAdmin(false);
             User user = storage.add(newUser);
+            statistics.setLoginActivity(user);
 
             HttpSession session = req.getSession(true);
             session.setAttribute("logged", true);

@@ -7,7 +7,9 @@ import peanut.medicine.web.user.User;
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -80,4 +82,12 @@ public class AdminStatistics {
         return adminStatistics;
     }
 
+    @Transactional
+    public void setLoginActivity(User user){
+
+        UserActivity userActivity = new UserActivity();
+        userActivity.setUser(user);
+        userActivity.setLoginTime(LocalDateTime.now());
+            em.persist(userActivity);
+    }
 }

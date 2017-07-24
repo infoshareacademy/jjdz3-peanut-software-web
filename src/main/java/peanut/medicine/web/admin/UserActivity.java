@@ -1,0 +1,50 @@
+package peanut.medicine.web.admin;
+
+import peanut.medicine.web.user.User;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+/**
+ * Created by Mariusz Szymanski on 2017-07-24
+ */
+@Entity
+public class UserActivity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "user_id")
+    private User user;
+    private LocalDateTime loginTime;
+    private LocalDateTime logoutTime;
+
+    public long getId() {
+        return id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public LocalDateTime getLoginTime() {
+        return loginTime;
+    }
+
+    public void setLoginTime(LocalDateTime loginTime) {
+        this.loginTime = loginTime;
+    }
+
+    public LocalDateTime getLogoutTime() {
+        return logoutTime;
+    }
+
+    public void setLogoutTime(LocalDateTime logoutTime) {
+        this.logoutTime = logoutTime;
+    }
+}
