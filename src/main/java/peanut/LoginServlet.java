@@ -69,7 +69,6 @@ public class LoginServlet extends HttpServlet {
             newUser.setEmail(email);
             newUser.setAdmin(false);
             User user = storage.add(newUser);
-            statistics.setLoginActivity(user);
 
             HttpSession session = req.getSession(true);
             session.setAttribute("logged", true);
@@ -82,6 +81,8 @@ public class LoginServlet extends HttpServlet {
             LOGGER.debug("name:"+session.getAttribute("name"));
             LOGGER.debug("email:"+session.getAttribute("email"));
             LOGGER.debug("admin:"+session.getAttribute("admin"));
+
+            statistics.setLoginActivity(user, session.getId());
 
             String referer = req.getHeader("Referer");
             if(referer == null || referer.isEmpty())

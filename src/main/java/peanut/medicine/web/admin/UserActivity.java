@@ -19,6 +19,7 @@ public class UserActivity {
     private User user;
     private LocalDateTime loginTime;
     private LocalDateTime logoutTime;
+    private String sessionId;
 
     public long getId() {
         return id;
@@ -46,5 +47,13 @@ public class UserActivity {
 
     public void setLogoutTime(LocalDateTime logoutTime) {
         this.logoutTime = logoutTime;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 }
