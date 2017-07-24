@@ -26,24 +26,21 @@ public class AdminStatistics {
 
     @PersistenceContext
     private EntityManager em;
+    private final String pathToCalendarsFolder = "src/main/resources/calendars";
 
-    public List<Survey> getAllSurveys() {
-        List<Survey> surveys = em
-                .createQuery("select distinct s from Survey s", Survey.class)
+    List<Survey> getAllSurveys() {
+        return em.createQuery("select distinct s from Survey s", Survey.class)
                 .getResultList();
-        return surveys;
     }
 
-    public List<User> getAllUsers() {
-        List<User> users = em
-                .createQuery("select distinct u from User u", User.class)
+    List<User> getAllUsers() {
+        return em.createQuery("select distinct u from User u", User.class)
                 .getResultList();
-        return users;
     }
 
     public List<String> getAllSpecializations() throws NullPointerException {
         List<String> specializations = new ArrayList<>();
-        File folder = new File("src/main/resources/calendars");
+        File folder = new File(pathToCalendarsFolder);
         String[] listOfFiles = folder.list();
         if (listOfFiles != null) specializations = Arrays.asList(listOfFiles);
         return specializations;
@@ -53,9 +50,8 @@ public class AdminStatistics {
         List<Doctor> doctors = new ArrayList<>();
         List<String> specializations = this.getAllSpecializations();
         for (String specialization : specializations) {
-            String folderPath = ("src/main/resources/calendars/" + specialization);
-//            String folderPath = getClass().getResource(("/calendars/" + specialization)).getPath();
-            File folder = new File(folderPath);
+            String pathToSpecializationFolder = (pathToCalendarsFolder + "/" + specialization);
+            File folder = new File(pathToSpecializationFolder);
             File[] listOfFiles = folder.listFiles();
             if (listOfFiles != null) {
                 for (File file : listOfFiles) {
@@ -73,19 +69,16 @@ public class AdminStatistics {
         return doctors;
     }
 
-    public Map<String, Long> getAdminStatistics() throws NullPointerException {
+    Map<String, Long> getAdminStatistics() throws NullPointerException {
+        Map<String, Long> preferredSpecializations = new HashMap<>();
         List<Object[]> result = em
-                .createQuery
-                        ("SELECT s.preferedSpecialization, count(s.preferedSpecialization) as number FROM Survey s group BY s.preferedSpecialization").getResultList();
-        Map<String, Long> adminStatistics = new HashMap<>();
-
+                .createQuery("SELECT s.preferedSpecialization, count(s.preferedSpecialization) as number "
+                        + "FROM Survey s group BY s.preferedSpecialization", Object[].class)
+                .getResultList();
         for (Object[] object : result) {
-            String preferedSpec = (String) object[0];
-            Long value = (Long) object[1];
-            adminStatistics.put(preferedSpec, value);
+            preferredSpecializations.put((String) object[0], (Long) object[1]);
         }
-
-        return adminStatistics;
+        return preferredSpecializations;
     }
 
     @Transactional
