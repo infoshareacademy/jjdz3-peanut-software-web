@@ -161,20 +161,35 @@
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="statistics">
                 <div class="panel-heading"><h3>STATISTICS</h3></div>
-                <c:forEach var="adminStatistics" items="${adminStatistics}">
-                    <div class="well">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="panel-title">
-                                    <p> ${adminStatistics.key}</p>
-                                </div>
+
+                <br><br>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Preferred specializations report</div>
+                    <div class="panel-body">
+                        <p>This report shows how many patients registered with the doctor of a particular specialty</p>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Doctor speciality</th>
+                                        <th>Number of patients</th>
+                                    </tr>
+                                    <c:forEach var="adminStatistics" items="${adminStatistics}">
+                                        <tr>
+                                            <td>${adminStatistics.key}</td>
+                                            <td>${adminStatistics.value}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
                             </div>
-                            <div class="panel-body">
-                                <p> ${adminStatistics.value}</p>
+                            <div class="col-sm-6 text-center">
+                                <h1><span class="glyphicon glyphicon-stats"></span></h1>
                             </div>
                         </div>
                     </div>
-                </c:forEach>
+                </div>
+                
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="settings">
                 <div class="panel-heading"><h3>Setings</h3></div>
