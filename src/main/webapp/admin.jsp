@@ -189,7 +189,29 @@
                         </div>
                     </div>
                 </div>
-                
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">User activities</div>
+                    <div class="panel-body">
+                        <p>This report shows users activities</p>
+                        <br>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>User email</th>
+                                <th>Login</th>
+                                <th>Logout</th>
+                            </tr>
+                            <c:forEach var="userActivity" items="${usersActivities}">
+                                <tr>
+                                    <td>${userActivity.user.email}</td>
+                                    <td>${userActivity.loginTime}</td>
+                                    <td>${userActivity.logoutTime}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </div>
+                </div>
+
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="settings">
                 <div class="panel-heading"><h3>Setings</h3></div>
