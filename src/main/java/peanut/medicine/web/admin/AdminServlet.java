@@ -33,14 +33,13 @@ public class AdminServlet extends HttpServlet {
         List<User> users = statistics.getAllUsers();
         List<Doctor> doctors = statistics.getAllDoctors();
         List<String> specializations = statistics.getAllSpecializations();
-        Map<String, Long> adminStatistics = statistics.getAdminStatistics();
+        Map preferredSpecializations = apiClient.getPreferredSpecializations();
 
         request.setAttribute("surveys", surveys);
         request.setAttribute("users", users);
         request.setAttribute("doctors", doctors);
         request.setAttribute("specializations", specializations);
-        request.setAttribute("adminStatistics", adminStatistics);
-
+        request.setAttribute("adminStatistics", preferredSpecializations);
 
         request.getRequestDispatcher("admin.jsp").forward(request,response);
     }

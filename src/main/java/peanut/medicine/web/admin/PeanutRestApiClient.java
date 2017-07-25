@@ -10,6 +10,7 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Mariusz Szymanski on 2017-07-24
@@ -28,5 +29,14 @@ public class PeanutRestApiClient {
         surveys.addAll(Arrays.asList(surveysTable));
         response.close();
         return surveys;
+    }
+
+    Map getPreferredSpecializations() {
+        final Client client = ClientBuilder.newClient();
+        final WebTarget target = client.target(PEANUT_API_SERVICE_URL.concat("specializations/all"));
+        final Response response = target.request().get();
+        final Map preferredSpecializations = response.readEntity(Map.class);
+        response.close();
+        return preferredSpecializations;
     }
 }
