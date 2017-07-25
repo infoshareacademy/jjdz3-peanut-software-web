@@ -34,7 +34,7 @@ public class AdminServlet extends HttpServlet {
         List<Doctor> doctors = statistics.getAllDoctors();
         List<String> specializations = statistics.getAllSpecializations();
         Map preferredSpecializations = apiClient.getPreferredSpecializations();
-        List<UserActivity> usersActivities = statistics.getAllUsersActivity();
+        List<UserActivity> usersActivities = apiClient.getAllUsersActivity();
 
         request.setAttribute("surveys", surveys);
         request.setAttribute("users", users);
