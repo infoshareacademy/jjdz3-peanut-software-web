@@ -107,4 +107,11 @@ public class AdminStatistics {
             });
         }
     }
+
+    public List<UserActivity> getAllUsersActivity() {
+        LOGGER.debug("Data query for users activity report!");
+        return em.createQuery("select distinct u from UserActivity u", UserActivity.class)
+                .getResultList();
+
+    }
 }
