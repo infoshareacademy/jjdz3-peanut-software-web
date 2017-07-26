@@ -129,7 +129,7 @@
                                     </c:when>
 
                                     <c:otherwise>
-                                        <p>${survey.appointments[0].doctorName}</p>
+                                        <p>${survey.appointments[0].doctorName} ${survey.appointments[0].doctorSurname}</p>
                                         <p>Choose one term from proposed visits:</p>
                                         <form method="POST" action="/peanut/admin/appoint">
                                             <input type="radio" name="appointment" value="${survey.appointments[0].id}" checked> ${survey.appointments[0].term}
