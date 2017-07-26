@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Mariusz Szymanski on 2017-06-10
@@ -35,11 +36,15 @@ public class AdminServlet extends HttpServlet {
         List<User> users = statistics.getAllUsers();
         List<Doctor> doctors = statistics.getAllDoctors();
         List<Appointment> appointments = appointmentStore.getFinalAppointments();
+        List<String> specializations = statistics.getAllSpecializations();
+        Map<String, Long> adminStatistics = statistics.getAdminStatistics();
 
         request.setAttribute("surveys", surveys);
         request.setAttribute("users", users);
         request.setAttribute("doctors", doctors);
         request.setAttribute("appointments", appointments);
+        request.setAttribute("specializations", specializations);
+        request.setAttribute("adminStatistics", adminStatistics);
 
         request.getRequestDispatcher("admin.jsp").forward(request,response);
     }

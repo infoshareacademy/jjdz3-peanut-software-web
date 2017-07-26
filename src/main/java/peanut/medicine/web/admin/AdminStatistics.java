@@ -10,9 +10,7 @@ import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 
@@ -75,4 +73,20 @@ public class AdminStatistics {
         }
         return doctors;
     }
+
+    public Map<String, Long> getAdminStatistics() throws NullPointerException {
+        List<Object[]> result = em
+                .createQuery
+                ("SELECT s.preferedSpecialization, count(s.preferedSpecialization) as number FROM Survey s group BY s.preferedSpecialization").getResultList();
+        Map<String, Long> adminStatistics = new HashMap<>();
+
+        for (Object[] object : result) {
+            String preferedSpec = (String) object[0];
+            Long value = (Long) object[1];
+            adminStatistics.put(preferedSpec, value);
+        }
+
+        return adminStatistics;
+    }
+
 }
