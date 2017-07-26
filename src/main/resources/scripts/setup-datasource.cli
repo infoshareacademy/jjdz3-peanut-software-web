@@ -1,4 +1,3 @@
-connect
 
 module add --name=mysql --resources=${settings.localRepository}/mysql/mysql-connector-java/${mysql.version}/mysql-connector-java-${mysql.version}.jar --dependencies=javax.api,javax.transaction.api
 
