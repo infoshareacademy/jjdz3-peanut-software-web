@@ -1,11 +1,11 @@
 package peanut.medicine.web.admin;
 
 import org.apache.logging.log4j.Logger;
-import static org.apache.logging.log4j.LogManager.getLogger;
 import peanut.medicine.doctor.Doctor;
 import peanut.medicine.web.iCalendar.IcalendarVEvent;
 import peanut.medicine.web.survey.Survey;
 import peanut.medicine.web.user.User;
+
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +14,8 @@ import javax.transaction.Transactional;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.*;
+
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 /**
  * Created by Mariusz Szymanski on 2017-06-10

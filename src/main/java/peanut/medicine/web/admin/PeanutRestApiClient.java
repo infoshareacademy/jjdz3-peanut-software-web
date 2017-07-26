@@ -24,7 +24,7 @@ public class PeanutRestApiClient {
 
     List<Survey> getAllSurveys() {
         final Client client = ClientBuilder.newClient();
-        final WebTarget target = client.target(PEANUT_API_SERVICE_URL.concat("surveys"));
+        final WebTarget target = client.target(PEANUT_API_SERVICE_URL.concat("survey"));
         final Response response = target.request().get();
         int responseStatus = response.getStatus();
         List<Survey> surveys = new ArrayList<>();
@@ -38,7 +38,7 @@ public class PeanutRestApiClient {
 
     Map getPreferredSpecializations() {
         final Client client = ClientBuilder.newClient();
-        final WebTarget target = client.target(PEANUT_API_SERVICE_URL.concat("specializations/all"));
+        final WebTarget target = client.target(PEANUT_API_SERVICE_URL.concat("specialization"));
         final Response response = target.request().get();
         int responseStatus = response.getStatus();
         Map preferredSpecializations = new HashMap();
@@ -51,7 +51,7 @@ public class PeanutRestApiClient {
 
     List<UserActivity> getAllUsersActivity() {
         final Client client = ClientBuilder.newClient();
-        final WebTarget target = client.target(PEANUT_API_SERVICE_URL.concat("usersActivity/all"));
+        final WebTarget target = client.target(PEANUT_API_SERVICE_URL.concat("usersActivity"));
         final Response response = target.request().get();
         int responseStatus = response.getStatus();
         List<UserActivity> usersActivities = new ArrayList<>();
@@ -77,7 +77,7 @@ public class PeanutRestApiClient {
 
     int getReportsModuleConnectionStatus() {
         final Client client = ClientBuilder.newClient();
-        final WebTarget target = client.target(PEANUT_API_SERVICE_URL.concat("usersActivity/all"));
+        final WebTarget target = client.target(PEANUT_API_SERVICE_URL.concat("usersActivity"));
         final Response response = target.request().get();
         return response.getStatus();
     }
