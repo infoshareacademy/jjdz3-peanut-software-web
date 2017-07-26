@@ -29,8 +29,7 @@
         console.log(element.id);
         auth2.attachClickHandler(element, {},
             function(googleUser) {
-                document.getElementById('name').innerText = "Signed in: " +
-                    googleUser.getBasicProfile().getName();
+//
                 var profile = googleUser.getBasicProfile();
 
                 var redirectUrl = "${pageContext.request.contextPath}/login";

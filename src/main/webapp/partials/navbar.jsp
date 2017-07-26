@@ -3,9 +3,19 @@
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
 
-    <c:if test="${!logged}">
-        <div class="collapse navbar-collapse"><p class="bg-danger">&nbsp;Full site functionality available after log in!</p></div>
-    </c:if>
+    <div class="collapse navbar-collapse">
+        <c:choose>
+            <c:when test="${logged}">
+                <small id="customNavPanel" class="pull-right">
+                    <span class="glyphicon glyphicon-user"></span>${name} ${surname}</small>
+            </c:when>
+            <c:otherwise>
+                <p class="bg-danger text-center">
+                    <span class="glyphicon glyphicon-hand-right"></span>
+                    Full site functionality available after log in!</p>
+            </c:otherwise>
+        </c:choose>
+    </div>
 
     <div class="container">
         <div class="navbar-header">
@@ -23,28 +33,33 @@
                 <li><a href="${pageContext.request.contextPath}#about">ABOUT US</a></li>
                 <li><a href="#">APPOINTMENTS</a></li>
                 <li><a href="${pageContext.request.contextPath}/survey">NEW PATIENTS</a></li>
-                <li><a href="${pageContext.request.contextPath}#services">SERVICES</a></li>
-                <li><a href="${pageContext.request.contextPath}#staff">STAFF</a></li>
-                <li><a href="${pageContext.request.contextPath}#contact">CONTACT</a></li>
-                <li>
                 <c:choose>
-                    <c:when test="${logged}">
-                        <a href="${pageContext.request.contextPath}/logout">SIGN OUT</a>
+                    <c:when test="${admin}">
+                        <li><a href="admin">ADMIN PANEL</a></li>
                     </c:when>
                     <c:otherwise>
-                    <div id="gSignInWrapper">
-                        <span class="label">Sign in:</span>
-                        <div id="customBtn" class="customGPlusSignIn">
-                            <span class="icon"></span>
-                            <span class="buttonText">Google</span>
-                        </div>
-                    </div>
-                    <script>startApp();</script>
+                        <li><a href="${pageContext.request.contextPath}#services">SERVICES</a></li>
+                        <li><a href="${pageContext.request.contextPath}#staff">STAFF</a></li>
+                        <li><a href="${pageContext.request.contextPath}#contact">CONTACT</a></li>
                     </c:otherwise>
                 </c:choose>
-                    <div id="name"></div>
+                <li>
+                    <c:choose>
+                        <c:when test="${logged}">
+                            <a href="${pageContext.request.contextPath}/logout">SIGN OUT</a>
+                        </c:when>
+                        <c:otherwise>
+                            <div id="gSignInWrapper">
+                                <div id="customBtn" class="customGPlusSignIn">
+                                    <span class="buttonText">Sign in with</span>
+                                    <span class="icon"></span>
+                                    <span class="buttonText">Google</span>
+                                </div>
+                            </div>
+                            <script>startApp();</script>
+                        </c:otherwise>
+                    </c:choose>
                 </li>
-                <li><a href="admin"><span class="glyphicon glyphicon-text-background"></span></a></li>
             </ul>
         </div>
     </div>
