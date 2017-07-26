@@ -1,6 +1,8 @@
 package peanut.medicine.web.admin;
 
 import peanut.medicine.doctor.Doctor;
+import peanut.medicine.web.Appointment;
+import peanut.medicine.web.storage.AppointmentStore;
 import peanut.medicine.web.survey.Survey;
 import peanut.medicine.web.user.User;
 
@@ -27,11 +29,15 @@ public class AdminServlet extends HttpServlet {
     @Inject @Default
     PeanutRestApiClient apiClient;
 
+    @Inject
+    AppointmentStore appointmentStore;
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Survey> surveys = statistics.getAllSurveys();
         List<User> users = statistics.getAllUsers();
         List<Doctor> doctors = statistics.getAllDoctors();
+        List<Appointment> appointments = appointmentStore.getFinalAppointments();
         List<String> specializations = statistics.getAllSpecializations();
         int reportsModuleConnectionStatus = apiClient.getReportsModuleConnectionStatus();
         Map preferredSpecializations = apiClient.getPreferredSpecializations();
@@ -40,6 +46,7 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("surveys", surveys);
         request.setAttribute("users", users);
         request.setAttribute("doctors", doctors);
+        request.setAttribute("appointments", appointments);
         request.setAttribute("specializations", specializations);
         request.setAttribute("adminStatistics", preferredSpecializations);
         request.setAttribute("usersActivities", usersActivities);

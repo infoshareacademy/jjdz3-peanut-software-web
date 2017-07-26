@@ -1,10 +1,11 @@
 package peanut.medicine.web.admin;
 
 import org.apache.logging.log4j.Logger;
+import static org.apache.logging.log4j.LogManager.getLogger;
 import peanut.medicine.doctor.Doctor;
+import peanut.medicine.web.iCalendar.IcalendarVEvent;
 import peanut.medicine.web.survey.Survey;
 import peanut.medicine.web.user.User;
-
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,8 +14,6 @@ import javax.transaction.Transactional;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.*;
-
-import static org.apache.logging.log4j.LogManager.getLogger;
 
 /**
  * Created by Mariusz Szymanski on 2017-06-10
@@ -28,9 +27,11 @@ public class AdminStatistics {
     private EntityManager em;
     private final String pathToCalendarsFolder = "src/main/resources/calendars";
 
-    List<Survey> getAllSurveys() {
-        return em.createQuery("select distinct s from Survey s", Survey.class)
+    public List<Survey> getAllSurveys() {
+        List<Survey> surveys = em
+                .createQuery("select distinct s from Survey s left join fetch s.appointments", Survey.class)
                 .getResultList();
+        return surveys;
     }
 
     List<User> getAllUsers() {
@@ -40,7 +41,7 @@ public class AdminStatistics {
 
     public List<String> getAllSpecializations() throws NullPointerException {
         List<String> specializations = new ArrayList<>();
-        File folder = new File(pathToCalendarsFolder);
+        File folder = new File(IcalendarVEvent.DOCTORS_CALENDARS_PATH);
         String[] listOfFiles = folder.list();
         if (listOfFiles != null) specializations = Arrays.asList(listOfFiles);
         return specializations;
@@ -50,8 +51,11 @@ public class AdminStatistics {
         List<Doctor> doctors = new ArrayList<>();
         List<String> specializations = this.getAllSpecializations();
         for (String specialization : specializations) {
-            String pathToSpecializationFolder = (pathToCalendarsFolder + "/" + specialization);
-            File folder = new File(pathToSpecializationFolder);
+
+            String folderPath = (IcalendarVEvent.DOCTORS_CALENDARS_PATH + specialization);
+            LOGGER.debug("Doctor calendars path:"+ folderPath);
+
+            File folder = new File(folderPath);
             File[] listOfFiles = folder.listFiles();
             if (listOfFiles != null) {
                 for (File file : listOfFiles) {
@@ -61,6 +65,7 @@ public class AdminStatistics {
                         String doctorName = doctorIdentitySplitted[0];
                         String doctorSurname = doctorIdentitySplitted[1];
                         Doctor doc = new Doctor(doctorName, doctorSurname, specialization);
+                        doc.setCalendarFile(specialization + "/" + file.getName());
                         doctors.add(doc);
                     }
                 }

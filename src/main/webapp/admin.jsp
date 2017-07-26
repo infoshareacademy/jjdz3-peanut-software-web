@@ -60,7 +60,7 @@
                                         <div class="well text-center">
                                             <span class="glyphicon glyphicon-calendar logo-medium"></span>
                                             <h2>Visits</h2>
-                                            <span class="badge">0</span>
+                                            <span class="badge">${appointments.size()}</span>
                                         </div>
                                     </a>
                                 </div>
@@ -118,6 +118,28 @@
                                 <p>Email: ${survey.email}</p>
                                 <p>Prefered doctor's specialization: ${survey.preferedSpecialization}</p>
                                 <p>Prefered day: ${survey.preferedDay}</p>
+
+                                <c:choose>
+                                    <c:when test="${survey.appointments.size() == 0}">
+                                        <p><a href="/peanut/admin/appoint?survey=${survey.id}">Make appointment</a></p>
+                                    </c:when>
+
+                                    <c:when test="${survey.appointments.size() == 1}">
+                                        <p>Planned visit: ${survey.appointments[0].doctorName} ${survey.appointments[0].doctorSurname} [${survey.appointments[0].doctorSpecialization}] - ${survey.appointments[0].term}</p>
+                                    </c:when>
+
+                                    <c:otherwise>
+                                        <p>${survey.appointments[0].doctorName} ${survey.appointments[0].doctorSurname}</p>
+                                        <p>Choose one term from proposed visits:</p>
+                                        <form method="POST" action="/peanut/admin/appoint">
+                                            <input type="radio" name="appointment" value="${survey.appointments[0].id}" checked> ${survey.appointments[0].term}
+                                            <input type="radio" name="appointment" value="${survey.appointments[1].id}"> ${survey.appointments[1].term}
+                                            <input type="submit" value="Choose">
+                                        </form>
+
+                                    </c:otherwise>
+                                </c:choose>
+
                             </div>
                         </div>
                     </div>
@@ -127,6 +149,21 @@
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="visits">
                 <div class="panel-heading"><h3>VISITS</h3></div>
+
+                <c:forEach var="appointment" items="${appointments}">
+                    <div class="well">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">${appointment.survey.name} ${appointment.survey.surname}</div>
+                            </div>
+                            <div class="panel-body">
+                                <p>${appointment.doctorName} ${appointment.doctorSurname} [${appointment.doctorSpecialization}]</p>
+                                <p>Term: ${appointment.term}</p>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="users">
                 <div class="panel-heading"><h3>USERS</h3></div>
@@ -154,6 +191,7 @@
                             </div>
                             <div class="panel-body">
                                 <p>Specialization: ${doctor.specialization}</p>
+                                <p>Calendar file: ${doctor.calendarFile}</p>
                             </div>
                         </div>
                     </div>

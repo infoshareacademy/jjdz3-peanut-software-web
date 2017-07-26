@@ -2,12 +2,10 @@ package peanut.medicine.web.storage;
 
 import peanut.medicine.web.survey.Survey;
 import javax.enterprise.inject.Default;
-import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-@Singleton
 @Default
 public class SurveyStore {
 
@@ -19,4 +17,7 @@ public class SurveyStore {
         em.persist(survey);
     }
 
+    public Survey find(long id) {
+        return em.find(Survey.class, id);
+    }
 }
