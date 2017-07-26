@@ -7,7 +7,7 @@
         <c:choose>
             <c:when test="${logged}">
                 <small id="customNavPanel" class="pull-right">
-                    <span class="glyphicon glyphicon-user"></span>${name} ${surname}</small>
+                    <span class="glyphicon glyphicon-user"></span> ${name} ${surname}</small>
             </c:when>
             <c:otherwise>
                 <p class="bg-danger text-center">

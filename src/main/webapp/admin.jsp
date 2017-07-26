@@ -13,7 +13,7 @@
 
     <div class="row" id="myMenu">
         <div class="col-sm-3 col-left">
-            <nav class="navbar navbar-inverse" role="navigation">
+            <nav class="navbar navbar-inverse navbar-fixed-left">
                 <div class="panel-heading"><h3>ADMIN PANEL</h3></div>
                 <ul class="nav nav-pills nav-stacked">
                     <li><a data-toggle="collapse" data-parent="#myMenu" href="#dashboard">Dashboard</a></li>
@@ -23,7 +23,7 @@
                     <li><a data-toggle="collapse" data-parent="#myMenu" href="#users">Users</a></li>
                     <li><a data-toggle="collapse" data-parent="#myMenu" href="#doctors">Doctors</a></li>
                     <li><a data-toggle="collapse" data-parent="#myMenu" href="#statistics">Statistics</a></li>
-                    <li><a data-toggle="collapse" data-parent="#myMenu" href="#settings">Settings</a></li>
+                    <%--<li><a data-toggle="collapse" data-parent="#myMenu" href="#settings">Settings</a></li>--%>
                 </ul>
             </nav>
         </div>
@@ -121,19 +121,23 @@
 
                                 <c:choose>
                                     <c:when test="${survey.appointments.size() == 0}">
-                                        <p><a href="/peanut/admin/appoint?survey=${survey.id}">Make appointment</a></p>
+                                        <p><a href="admin/appoint?survey=${survey.id}">Make appointment</a></p>
                                     </c:when>
 
                                     <c:when test="${survey.appointments.size() == 1}">
-                                        <p>Planned visit: ${survey.appointments[0].doctorName} ${survey.appointments[0].doctorSurname} [${survey.appointments[0].doctorSpecialization}] - ${survey.appointments[0].term}</p>
+                                        <p>Planned visit:
+                                                ${survey.appointments[0].doctorName} ${survey.appointments[0].doctorSurname}
+                                            [${survey.appointments[0].doctorSpecialization}] - ${survey.appointments[0].term}</p>
                                     </c:when>
 
                                     <c:otherwise>
                                         <p>${survey.appointments[0].doctorName} ${survey.appointments[0].doctorSurname}</p>
                                         <p>Choose one term from proposed visits:</p>
-                                        <form method="POST" action="/peanut/admin/appoint">
-                                            <input type="radio" name="appointment" value="${survey.appointments[0].id}" checked> ${survey.appointments[0].term}
-                                            <input type="radio" name="appointment" value="${survey.appointments[1].id}"> ${survey.appointments[1].term}
+                                        <form method="POST" action="admin/appoint">
+                                            <input type="radio" name="appointment" value="${survey.appointments[0].id}" checked>
+                                                ${survey.appointments[0].term}
+                                            <input type="radio" name="appointment" value="${survey.appointments[1].id}">
+                                                ${survey.appointments[1].term}
                                             <input type="submit" value="Choose">
                                         </form>
 
@@ -276,8 +280,6 @@
             </div>
         </div>
     </div>
-
-</div>
 
 </div>
 

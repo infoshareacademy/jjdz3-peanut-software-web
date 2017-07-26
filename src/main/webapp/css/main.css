@@ -22,7 +22,7 @@ body {
 }
 
 .jumbotron {
-    background-color: #1dadd1;
+    background-color: #004466;
     color: #ffffff;
     padding: 100px 25px;
     /*height: 100vh;*/
@@ -33,17 +33,17 @@ body {
 }
 
 .logo {
-    color: #1dadd1;
+    color: #004466;
     font-size: 200px;
 }
 
 .logo-small {
-    color: #1dadd1;
+    color: #004466;
     font-size: 50px;
 }
 
 .logo-medium {
-    color: #1dadd1;
+    color: #004466;
     font-size: 100px;
 }
 
@@ -75,7 +75,7 @@ body {
 
 .navbar {
     margin-bottom: 0;
-    background-color: #1dadd1;
+    background-color: #004466;
     z-index: 9999;
     border: 0;
     font-size: 14px !important;
@@ -89,13 +89,18 @@ body {
 }
 
 .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #1dadd1 !important;
+    color: #004466 !important;
     background-color: #fff !important;
 }
 
 .navbar-default .navbar-toggle {
     border-color: transparent;
     color: #fff !important;
+}
+
+.navbar-fixed-left {
+    width: 240px;
+    position: fixed;
 }
 
 h2 {
@@ -118,11 +123,11 @@ h4 {
 footer .glyphicon {
     font-size: 30px;
     margin-bottom: 20px;
-    color: #1dadd1;
+    color: #004466;
 }
 
 .panel-heading {
-    background-color: #1dadd1 !important;
+    background-color: #004466 !important;
     color: #fff !important;
     font-size: 14px !important;
     text-transform: uppercase;
@@ -131,17 +136,17 @@ footer .glyphicon {
 }
 
 .btn:hover, .navbar-nav li.active a {
-    color: #1dadd1 !important;
+    color: #004466 !important;
     background-color: #fff !important;
 }
 
 .nav-pills li a:hover, .nav-pils li.active a {
-    color: #1dadd1 !important;
+    color: #004466 !important;
     background-color: #fff !important;
 }
 
 .badge {
-    color: #1dadd1;
+    background-color: #004466;
     font-size: 40px;
 }
 
@@ -150,7 +155,7 @@ footer .glyphicon {
 #customBtn {
     display: inline-block;
     background: white;
-    color:#1dadd1;
+    color: #004466;
     padding-top: 2px;
     padding-bottom: 2px;
     margin-top: 12px;
@@ -158,7 +163,7 @@ footer .glyphicon {
 }
 #customBtn:hover {
     cursor: pointer;
-    background: #1dadd1;
+    background: #004466;
     color: white;
 }
 span.label {
