@@ -29,10 +29,11 @@ public class AdminServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<Survey> surveys = apiClient.getAllSurveys();
+        List<Survey> surveys = statistics.getAllSurveys();
         List<User> users = statistics.getAllUsers();
         List<Doctor> doctors = statistics.getAllDoctors();
         List<String> specializations = statistics.getAllSpecializations();
+        int reportsModuleConnectionStatus = apiClient.getReportsModuleConnectionStatus();
         Map preferredSpecializations = apiClient.getPreferredSpecializations();
         List<UserActivity> usersActivities = apiClient.getAllUsersActivity();
 
@@ -42,6 +43,7 @@ public class AdminServlet extends HttpServlet {
         request.setAttribute("specializations", specializations);
         request.setAttribute("adminStatistics", preferredSpecializations);
         request.setAttribute("usersActivities", usersActivities);
+        request.setAttribute("reportsModuleConnectionStatus", reportsModuleConnectionStatus);
 
         request.getRequestDispatcher("admin.jsp").forward(request,response);
     }

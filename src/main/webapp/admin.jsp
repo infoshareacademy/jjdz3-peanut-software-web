@@ -160,7 +160,27 @@
                 </c:forEach>
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="statistics">
-                <div class="panel-heading"><h3>STATISTICS</h3></div>
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-6"><h3>STATISTICS</h3></div>
+                        <div class="col-sm-6">
+                            <h3 class="pull-right">Reports API
+                                <c:choose>
+                                    <c:when test="${reportsModuleConnectionStatus == 200}">
+                                        <span class="glyphicon glyphicon-transfer"></span> OK
+                                        (${reportsModuleConnectionStatus})
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="glyphicon glyphicon-transfer"></span>
+                                        <span class="glyphicon glyphicon-alert"></span>
+                                        (${reportsModuleConnectionStatus})
+                                    </c:otherwise>
+                                </c:choose>
+                            </h3>
+
+                        </div>
+                    </div>
+                </div>
 
                 <br><br>
                 <div class="panel panel-default">
