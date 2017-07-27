@@ -22,10 +22,28 @@
                     <form class="form-horizontal" action="survey" method="post">
 
                         <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-9">
+                                <c:choose>
+                                    <c:when test="${violations.size() > 0}">
+                                        <h5 class="text-danger">Please complete properly all required fields</h5>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <h5 class="text-info">Please complete all required fields</h5>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="name" class="col-sm-2 control-label">Name</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" name="name" id="name" placeholder="Name"
                                        value="${name}">
+                                <c:forEach var="violation" items="${violations}">
+                                    <c:if test='${violation.propertyPath == "name"}'>
+                                        <h5 class="text-danger">${violation.message}</h5>
+                                    </c:if>
+                                </c:forEach>
                             </div>
                         </div>
 
@@ -33,8 +51,12 @@
                             <label for="surname" class="col-sm-2 control-label">Surname</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" name="surname" id="surname"
-                                       placeholder="Surname"
-                                       value="${surname}">
+                                       placeholder="Surname" value="${surname}">
+                                <c:forEach var="violation" items="${violations}">
+                                    <c:if test='${violation.propertyPath == "surname"}'>
+                                        <h5 class="text-danger">${violation.message}</h5>
+                                    </c:if>
+                                </c:forEach>
                             </div>
                         </div>
 
@@ -43,6 +65,11 @@
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" name="pesel" id="pesel" placeholder="Pesel"
                                        value="${pesel}">
+                                <c:forEach var="violation" items="${violations}">
+                                    <c:if test='${violation.propertyPath == "pesel"}'>
+                                        <h5 class="text-danger">${violation.message}</h5>
+                                    </c:if>
+                                </c:forEach>
                             </div>
                         </div>
 
@@ -54,6 +81,11 @@
                                     <option name="male" value="Male">Male</option>
                                     <option name="female" value="Female">Female</option>
                                 </select>
+                                <c:forEach var="violation" items="${violations}">
+                                    <c:if test='${violation.propertyPath == "sex"}'>
+                                        <h5 class="text-danger">${violation.message}</h5>
+                                    </c:if>
+                                </c:forEach>
                             </div>
                         </div>
 
@@ -62,6 +94,11 @@
                             <div class="col-sm-9">
                                 <input type="email" class="form-control" name="email" id="email" placeholder="Email"
                                        value="${email}">
+                                <c:forEach var="violation" items="${violations}">
+                                    <c:if test='${violation.propertyPath == "email"}'>
+                                        <h5 class="text-danger">${violation.message}</h5>
+                                    </c:if>
+                                </c:forEach>
                             </div>
                         </div>
 
@@ -75,6 +112,11 @@
                                         <option value="${specialization}">${specialization}</option>
                                     </c:forEach>
                                 </select>
+                                <c:forEach var="violation" items="${violations}">
+                                    <c:if test='${violation.propertyPath == "preferedSpecialization"}'>
+                                        <h5 class="text-danger">${violation.message}</h5>
+                                    </c:if>
+                                </c:forEach>
                             </div>
                         </div>
 
@@ -89,27 +131,14 @@
                                     <option name="thursday" value="Thursday">Thursday</option>
                                     <option name="friday" value="Friday">Friday</option>
                                 </select>
+                                <c:forEach var="violation" items="${violations}">
+                                    <c:if test='${violation.propertyPath == "preferedDay"}'>
+                                        <h5 class="text-danger">${violation.message}</h5>
+                                    </c:if>
+                                </c:forEach>
                             </div>
                         </div>
                         <br>
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-9">
-                                <c:choose>
-                                    <c:when test="${violations.size() > 0}">
-                                        <p class="bg-warning">Number of violations: ${violations.size()}</p>
-                                        <ul>
-                                            <c:forEach var="violation" items="${violations}">
-                                                <li>${violation.message}</li>
-                                            </c:forEach>
-                                        </ul>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <p class="text-info">Please complete all required fields</p>
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-9">
