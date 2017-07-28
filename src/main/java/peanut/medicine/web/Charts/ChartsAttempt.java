@@ -20,7 +20,7 @@ import javax.swing.*;
 import java.util.Map;
 
 
-public class ChartsHuj extends ApplicationFrame {
+public class ChartsAttempt extends ApplicationFrame {
 
     @Inject
     @Default
@@ -30,7 +30,7 @@ public class ChartsHuj extends ApplicationFrame {
     @PersistenceContext
     private EntityManager em;
 
-    public ChartsHuj( String title ) throws NullPointerException {
+    public ChartsAttempt(String title ) throws NullPointerException {
         super( title );
         setContentPane(createDemoPanel( ));
     }
@@ -82,7 +82,7 @@ public class ChartsHuj extends ApplicationFrame {
 
 
     public static void main( String[ ] args ) throws NullPointerException{
-        ChartsHuj demo = new ChartsHuj( "Mobile Sales" );
+        ChartsAttempt demo = new ChartsAttempt( "Mobile Sales" );
         demo.setSize( 560 , 367 );
         RefineryUtilities.centerFrameOnScreen( demo );
         demo.setVisible( true );
