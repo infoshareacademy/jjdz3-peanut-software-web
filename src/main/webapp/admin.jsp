@@ -4,6 +4,43 @@
 <html>
 <head>
     <jsp:include page="partials/meta.jsp"/>
+    <%--<jsp:useBean id="adminStatistics" scope="request" type="org.hibernate.action.internal.CollectionAction"/>--%>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages':['corechart']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+
+        function drawChart() {
+
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows([
+                ['urologist', 2],
+                ['internist', 2],
+                ['laryngologist', 2],
+                ['dentist', 2],
+            ]);
+
+            // Set chart options
+            var options = {'title':' ',
+                'width':700,
+                'height':500};
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+
+
 </head>
 <body id="start" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -23,7 +60,7 @@
                     <li><a data-toggle="collapse" data-parent="#myMenu" href="#users">Users</a></li>
                     <li><a data-toggle="collapse" data-parent="#myMenu" href="#doctors">Doctors</a></li>
                     <li><a data-toggle="collapse" data-parent="#myMenu" href="#statistics">Statistics</a></li>
-                    <li><a data-toggle="collapse" data-parent="#myMenu" href="#settings">Settings</a></li>
+                    <li><a data-toggle="collapse" data-parent="#myMenu" href="#settings">Charts</a></li>
                 </ul>
             </nav>
         </div>
@@ -177,7 +214,20 @@
                 </c:forEach>
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="settings">
-                <div class="panel-heading"><h3>Setings</h3></div>
+                <div class="panel-heading"><h3>Charts</h3></div>
+                <div class="well">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <p>How many specializations have been chosen</p>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <p> <div id="chart_div"></div></p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
