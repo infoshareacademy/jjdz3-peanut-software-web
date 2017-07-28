@@ -27,10 +27,10 @@ import static org.apache.logging.log4j.LogManager.getLogger;
 public class SurveyServlet extends HttpServlet{
 
     @Inject
-    SurveyStore storage;
+    private SurveyStore storage;
 
     @Inject
-    AdminStatistics statistics;
+    private AdminStatistics statistics;
 
     private static final Logger LOGGER = getLogger(SurveyServlet.class);
 

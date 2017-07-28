@@ -13,7 +13,7 @@
 
     <div class="row" id="myMenu">
         <div class="col-sm-3 col-left">
-            <nav class="navbar navbar-inverse" role="navigation">
+            <nav class="navbar navbar-inverse navbar-fixed-left">
                 <div class="panel-heading"><h3>ADMIN PANEL</h3></div>
                 <ul class="nav nav-pills nav-stacked">
                     <li><a data-toggle="collapse" data-parent="#myMenu" href="#dashboard">Dashboard</a></li>
@@ -23,7 +23,7 @@
                     <li><a data-toggle="collapse" data-parent="#myMenu" href="#users">Users</a></li>
                     <li><a data-toggle="collapse" data-parent="#myMenu" href="#doctors">Doctors</a></li>
                     <li><a data-toggle="collapse" data-parent="#myMenu" href="#statistics">Statistics</a></li>
-                    <li><a data-toggle="collapse" data-parent="#myMenu" href="#settings">Settings</a></li>
+                    <%--<li><a data-toggle="collapse" data-parent="#myMenu" href="#settings">Settings</a></li>--%>
                 </ul>
             </nav>
         </div>
@@ -121,19 +121,23 @@
 
                                 <c:choose>
                                     <c:when test="${survey.appointments.size() == 0}">
-                                        <p><a href="/peanut/admin/appoint?survey=${survey.id}">Make appointment</a></p>
+                                        <p><a href="admin/appoint?survey=${survey.id}">Make appointment</a></p>
                                     </c:when>
 
                                     <c:when test="${survey.appointments.size() == 1}">
-                                        <p>Planned visit: ${survey.appointments[0].doctorName} ${survey.appointments[0].doctorSurname} [${survey.appointments[0].doctorSpecialization}] - ${survey.appointments[0].term}</p>
+                                        <p>Planned visit:
+                                                ${survey.appointments[0].doctorName} ${survey.appointments[0].doctorSurname}
+                                            [${survey.appointments[0].doctorSpecialization}] - ${survey.appointments[0].term}</p>
                                     </c:when>
 
                                     <c:otherwise>
                                         <p>${survey.appointments[0].doctorName} ${survey.appointments[0].doctorSurname}</p>
                                         <p>Choose one term from proposed visits:</p>
-                                        <form method="POST" action="/peanut/admin/appoint">
-                                            <input type="radio" name="appointment" value="${survey.appointments[0].id}" checked> ${survey.appointments[0].term}
-                                            <input type="radio" name="appointment" value="${survey.appointments[1].id}"> ${survey.appointments[1].term}
+                                        <form method="POST" action="admin/appoint">
+                                            <input type="radio" name="appointment" value="${survey.appointments[0].id}" checked>
+                                                ${survey.appointments[0].term}
+                                            <input type="radio" name="appointment" value="${survey.appointments[1].id}">
+                                                ${survey.appointments[1].term}
                                             <input type="submit" value="Choose">
                                         </form>
 
@@ -198,29 +202,84 @@
                 </c:forEach>
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="statistics">
-                <div class="panel-heading"><h3>STATISTICS</h3></div>
-                <c:forEach var="adminStatistics" items="${adminStatistics}">
-                    <div class="well">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="panel-title">
-                                    <p> ${adminStatistics.key}</p>
-                                </div>
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-6"><h3>STATISTICS</h3></div>
+                        <div class="col-sm-6">
+                            <h3 class="pull-right">Reports API
+                                <c:choose>
+                                    <c:when test="${reportsModuleConnectionStatus == 200}">
+                                        <span class="glyphicon glyphicon-transfer"></span> OK
+                                        (${reportsModuleConnectionStatus})
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="glyphicon glyphicon-transfer"></span>
+                                        <span class="glyphicon glyphicon-alert"></span>
+                                        (${reportsModuleConnectionStatus})
+                                    </c:otherwise>
+                                </c:choose>
+                            </h3>
+
+                        </div>
+                    </div>
+                </div>
+
+                <br><br>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Preferred specializations report</div>
+                    <div class="panel-body">
+                        <p>This report shows how many patients registered with the doctor of a particular specialty</p>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Doctor speciality</th>
+                                        <th>Number of patients</th>
+                                    </tr>
+                                    <c:forEach var="adminStatistics" items="${adminStatistics}">
+                                        <tr>
+                                            <td>${adminStatistics.key}</td>
+                                            <td>${adminStatistics.value}</td>
+                                        </tr>
+                                    </c:forEach>
+                                </table>
                             </div>
-                            <div class="panel-body">
-                                <p> ${adminStatistics.value}</p>
+                            <div class="col-sm-6 text-center">
+                                <h1><span class="glyphicon glyphicon-stats"></span></h1>
                             </div>
                         </div>
                     </div>
-                </c:forEach>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">User activities</div>
+                    <div class="panel-body">
+                        <p>This report shows users activities</p>
+                        <br>
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>User email</th>
+                                <th>Login</th>
+                                <th>Logout</th>
+                            </tr>
+                            <c:forEach var="userActivity" items="${usersActivities}">
+                                <tr>
+                                    <td>${userActivity.user.email}</td>
+                                    <td>${userActivity.loginTime}</td>
+                                    <td>${userActivity.logoutTime}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </div>
+                </div>
+
             </div>
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="settings">
                 <div class="panel-heading"><h3>Setings</h3></div>
             </div>
         </div>
     </div>
-
-</div>
 
 </div>
 

@@ -2,6 +2,7 @@ package peanut;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import org.apache.logging.log4j.Logger;
+import peanut.medicine.web.admin.AdminStatistics;
 import peanut.medicine.web.storage.UserStore;
 import peanut.medicine.web.user.User;
 
@@ -28,6 +29,8 @@ public class LoginServlet extends HttpServlet {
     @Inject
     @Default
     UserStore storage;
+    @Inject @Default
+    AdminStatistics statistics;
 
     @Override
     protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -78,6 +81,8 @@ public class LoginServlet extends HttpServlet {
             LOGGER.debug("name:"+session.getAttribute("name"));
             LOGGER.debug("email:"+session.getAttribute("email"));
             LOGGER.debug("admin:"+session.getAttribute("admin"));
+
+            statistics.setLoginActivity(user, session.getId());
 
             String referer = req.getHeader("Referer");
             if(referer == null || referer.isEmpty())

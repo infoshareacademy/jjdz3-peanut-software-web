@@ -1,18 +1,21 @@
 package peanut.medicine.web.admin;
 
-import static org.apache.logging.log4j.LogManager.getLogger;
 import org.apache.logging.log4j.Logger;
 import peanut.medicine.doctor.Doctor;
 import peanut.medicine.web.iCalendar.IcalendarVEvent;
 import peanut.medicine.web.survey.Survey;
 import peanut.medicine.web.user.User;
+
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.*;
 
-
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 /**
  * Created by Mariusz Szymanski on 2017-06-10
@@ -24,6 +27,7 @@ public class AdminStatistics {
 
     @PersistenceContext
     private EntityManager em;
+    private final String pathToCalendarsFolder = "src/main/resources/calendars";
 
     public List<Survey> getAllSurveys() {
         List<Survey> surveys = em
@@ -32,11 +36,9 @@ public class AdminStatistics {
         return surveys;
     }
 
-    public List<User> getAllUsers() {
-        List<User> users = em
-                .createQuery("select distinct u from User u", User.class)
+    List<User> getAllUsers() {
+        return em.createQuery("select distinct u from User u", User.class)
                 .getResultList();
-        return users;
     }
 
     public List<String> getAllSpecializations() throws NullPointerException {
@@ -74,19 +76,49 @@ public class AdminStatistics {
         return doctors;
     }
 
-    public Map<String, Long> getAdminStatistics() throws NullPointerException {
+    Map<String, Long> getAdminStatistics() throws NullPointerException {
+        Map<String, Long> preferredSpecializations = new HashMap<>();
         List<Object[]> result = em
-                .createQuery
-                ("SELECT s.preferedSpecialization, count(s.preferedSpecialization) as number FROM Survey s group BY s.preferedSpecialization").getResultList();
-        Map<String, Long> adminStatistics = new HashMap<>();
-
+                .createQuery("SELECT s.preferedSpecialization, count(s.preferedSpecialization) as number "
+                        + "FROM Survey s group BY s.preferedSpecialization", Object[].class)
+                .getResultList();
         for (Object[] object : result) {
-            String preferedSpec = (String) object[0];
-            Long value = (Long) object[1];
-            adminStatistics.put(preferedSpec, value);
+            preferredSpecializations.put((String) object[0], (Long) object[1]);
         }
-
-        return adminStatistics;
+        return preferredSpecializations;
     }
 
+    @Transactional
+    public void setLoginActivity(User user, String sessionId) {
+
+        UserActivity userActivity = new UserActivity();
+        userActivity.setUser(user);
+        LocalDateTime dateTime = LocalDateTime.now();
+        userActivity.setLoginTime(dateTime);
+        userActivity.setSessionId(sessionId);
+        em.persist(userActivity);
+        LOGGER.debug("User: " + user.getEmail() + " logged in: " + dateTime);
+    }
+
+    @Transactional
+    public void setLogoutActivity(String userEmail, String sessionId) {
+
+        TypedQuery<UserActivity> query = em.createQuery(
+                "select distinct u from UserActivity u where u.sessionId like :id", UserActivity.class);
+        List<UserActivity> userActivities = query.setParameter("id", sessionId).getResultList();
+        if (userActivities.size() != 0) {
+            Optional.ofNullable(userActivities.get(0)).ifPresent(u -> {
+                LocalDateTime dateTimeNow = LocalDateTime.now();
+                em.find(UserActivity.class, u.getId()).setLogoutTime(dateTimeNow);
+                LOGGER.debug("User: " + userEmail + " logged out: " + dateTimeNow);
+            });
+        }
+    }
+
+    public List<UserActivity> getAllUsersActivity() {
+        LOGGER.debug("Data query for users activity report!");
+        return em.createQuery("select distinct u from UserActivity u", UserActivity.class)
+                .getResultList();
+
+    }
 }

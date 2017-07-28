@@ -26,6 +26,8 @@ public class AdminServlet extends HttpServlet {
 
     @Inject @Default
     AdminStatistics statistics;
+    @Inject @Default
+    PeanutRestApiClient apiClient;
 
     @Inject
     AppointmentStore appointmentStore;
@@ -37,14 +39,18 @@ public class AdminServlet extends HttpServlet {
         List<Doctor> doctors = statistics.getAllDoctors();
         List<Appointment> appointments = appointmentStore.getFinalAppointments();
         List<String> specializations = statistics.getAllSpecializations();
-        Map<String, Long> adminStatistics = statistics.getAdminStatistics();
+        int reportsModuleConnectionStatus = apiClient.getReportsModuleConnectionStatus();
+        Map preferredSpecializations = apiClient.getPreferredSpecializations();
+        List<UserActivity> usersActivities = apiClient.getAllUsersActivity();
 
         request.setAttribute("surveys", surveys);
         request.setAttribute("users", users);
         request.setAttribute("doctors", doctors);
         request.setAttribute("appointments", appointments);
         request.setAttribute("specializations", specializations);
-        request.setAttribute("adminStatistics", adminStatistics);
+        request.setAttribute("adminStatistics", preferredSpecializations);
+        request.setAttribute("usersActivities", usersActivities);
+        request.setAttribute("reportsModuleConnectionStatus", reportsModuleConnectionStatus);
 
         request.getRequestDispatcher("admin.jsp").forward(request,response);
     }
