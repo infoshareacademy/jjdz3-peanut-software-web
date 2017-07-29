@@ -53,7 +53,7 @@ public class AppointServlet extends HttpServlet {
             LOGGER.debug(proposedTerm.getTerm());
         }
 
-        response.sendRedirect("/peanut/admin");
+        response.sendRedirect("/peanut/admin#survey"+surveyId);
     }
 
     @Override
@@ -68,6 +68,7 @@ public class AppointServlet extends HttpServlet {
                 appointment.getDoctorSpecialization());
         doctor.setCalendarFile(appointment.getDoctorCalendar());
         appointment.setDoctor(doctor);
+        long surveyId = appointment.getSurvey().getId();
 
         IcalendarVEvent icalendarVEvent = new IcalendarVEvent();
 
@@ -80,6 +81,6 @@ public class AppointServlet extends HttpServlet {
             LOGGER.error("generateInvitation Error"+ e.getMessage() + e.getCause());
         }
 
-        resp.sendRedirect("/peanut/admin");
+        resp.sendRedirect("/peanut/admin#survey"+surveyId);
     }
 }

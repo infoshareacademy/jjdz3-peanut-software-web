@@ -100,11 +100,10 @@
                 </div>
             </div>
 
-
             <div class="panel panel-default panel-collapse collapse menu_collapse" id="registerForms">
                 <div class="panel-heading"><h3>REGISTRATION FORMS</h3></div>
                 <c:forEach var="survey" items="${surveys}">
-                    <div class="well">
+                    <div class="well" id="survey${survey.id}">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="panel-title">${survey.name}
@@ -286,6 +285,20 @@
 <jsp:include page="partials/footer.jsp"/>
 
 <script>
+    var hash = $(location).attr('hash');
+    if(hash == '#registerForms')
+    {
+        $('#dashboard').collapse('hide');
+        $('#registerForms').collapse('show');
+    }
+
+    if(hash.substring(1, 7) == 'survey')
+    {
+        $('#dashboard').collapse('hide');
+        $('#registerForms').collapse('show');
+        $('body').scrollTo('#'+hash);
+    }
+
     var $myMenu = $('#myMenu');
     $myMenu.on('show.bs.collapse', '.menu_collapse', function () {
         $myMenu.find('.menu_collapse.in').collapse('hide');
