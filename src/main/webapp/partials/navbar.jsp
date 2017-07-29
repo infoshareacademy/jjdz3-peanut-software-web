@@ -31,7 +31,7 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="${pageContext.request.contextPath}#about">ABOUT US</a></li>
-                <li><a href="#">APPOINTMENTS</a></li>
+                <%--<li><a href="#">APPOINTMENTS</a></li>--%>
                 <li><a href="${pageContext.request.contextPath}/survey">NEW PATIENTS</a></li>
                 <c:choose>
                     <c:when test="${admin}">

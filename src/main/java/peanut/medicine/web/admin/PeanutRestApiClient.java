@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import peanut.medicine.web.icd9.classification.Classification;
 import peanut.medicine.web.survey.Survey;
 
 import javax.enterprise.inject.Default;
@@ -73,6 +74,18 @@ public class PeanutRestApiClient {
             }
         }
         return usersActivities;
+    }
+
+    Classification getIcdClassification(){
+        final Client client = ClientBuilder.newClient();
+        final WebTarget target = client.target(PEANUT_API_SERVICE_URL.concat("classification"));
+        final Response response = target.request().get();
+        int responseStatus = response.getStatus();
+        Classification classification = new Classification();
+        if (responseStatus == 200) {
+            classification = response.readEntity(Classification.class);
+        }
+        return classification;
     }
 
     int getReportsModuleConnectionStatus() {
