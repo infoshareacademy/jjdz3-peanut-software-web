@@ -23,6 +23,7 @@
                     <li><a data-toggle="collapse" data-parent="#myMenu" href="#users">Users</a></li>
                     <li><a data-toggle="collapse" data-parent="#myMenu" href="#doctors">Doctors</a></li>
                     <li><a data-toggle="collapse" data-parent="#myMenu" href="#statistics">Statistics</a></li>
+                    <li><a href="icd-9">ICD-9 Classification</a></li>
                     <%--<li><a data-toggle="collapse" data-parent="#myMenu" href="#settings">Settings</a></li>--%>
                 </ul>
             </nav>
@@ -89,11 +90,11 @@
                                     vitae pretium vehicula, felis elit sollicitudin augue, vitae euismod dui
                                     nisl non felis.
                                 </p>
-                                <div class="btn-group" role="group" aria-label="What to do with message?">
-                                    <button type="button" class="btn btn-mini btn-default">Read</button>
-                                    <button type="button" class="btn btn-mini btn-default">Answer</button>
-                                    <button type="button" class="btn btn-mini btn-default">Remove</button>
-                                </div>
+                                <%--<div class="btn-group" role="group" aria-label="What to do with message?">--%>
+                                    <%--<button type="button" class="btn btn-mini btn-default">Read</button>--%>
+                                    <%--<button type="button" class="btn btn-mini btn-default">Answer</button>--%>
+                                    <%--<button type="button" class="btn btn-mini btn-default">Remove</button>--%>
+                                <%--</div>--%>
                             </div>
                         </div>
                     </div>
