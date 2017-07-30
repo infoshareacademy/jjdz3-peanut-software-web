@@ -8,6 +8,57 @@
 <body id="start" data-spy="scroll" data-target=".navbar" data-offset="60">
 
 <jsp:include page="partials/navbar.jsp"/>
+<!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', {'packages':['corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
+
+
+    function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+
+        var groupMap = {
+            <c:forEach var="groupMap" items="${adminStatistics}" varStatus="loop">
+            "${groupMap.key}": "${groupMap.value}"${!loop.last ? ',':''}
+            </c:forEach>
+        };
+
+        for (key in groupMap) {
+
+            var doctor = key;
+            var count = groupMap[key];
+
+            count = parseInt(count);
+
+            console.log('key: ' + doctor);
+            console.log('value: ' + count);
+
+
+            data.addRow([doctor, count]);
+
+        }
+
+
+
+
+        var options = {'title':' ',
+            'width':700,
+            'height':500};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>
 
 <div class="container-fluid bg-grey">
 
@@ -246,7 +297,7 @@
                                 </table>
                             </div>
                             <div class="col-sm-6 text-center">
-                                <h1><span class="glyphicon glyphicon-stats"></span></h1>
+                                <div id="chart_div"></div>
                             </div>
                         </div>
                     </div>
