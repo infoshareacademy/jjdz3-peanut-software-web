@@ -286,7 +286,19 @@
 <jsp:include page="partials/footer.jsp"/>
 
 <script>
+
+    function remove_hash_from_url()
+    {
+        var uri = window.location.toString();
+        if (uri.indexOf("#") > 0) {
+            var clean_uri = uri.substring(0, uri.indexOf("#"));
+            window.history.replaceState({}, document.title, clean_uri);
+        }
+    }
+
     var hash = $(location).attr('hash');
+    console.log('hash:'+hash);
+
     if(hash == '#registerForms')
     {
         $('#dashboard').collapse('hide');
@@ -297,7 +309,8 @@
     {
         $('#dashboard').collapse('hide');
         $('#registerForms').collapse('show');
-        $('body').scrollTo('#'+hash);
+        window.scrollTo(0, $(hash).offset().top);
+        remove_hash_from_url();
     }
 
     var $myMenu = $('#myMenu');
